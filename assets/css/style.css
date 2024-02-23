@@ -165,7 +165,7 @@ main {
 }
 
 .container-xxl {
-  max-width: 1500px;
+  max-width: none;
 }
 
 .container-xl {
@@ -5394,7 +5394,6 @@ body.loaded {
   border: 1px solid rgba(0, 0, 0, 0.2);
   width: calc(50% - 20px);
   height: calc(50% - 10px);
-  display: inline-block;
   margin-bottom: 20px;
   margin-right: 20px;
   border-radius: 15px;
@@ -5943,13 +5942,13 @@ footer.clean-footer.crev:before {
 }
 
 .freelancer .caption h1 {
-  font-size: 20vw;
+  font-size: 25vw;
   font-family: LXIIGX;
   font-weight: 800;
-  line-height: 1.2;
+  line-height: 0.65;
   text-transform: uppercase;
   position: absolute;
-  bottom: 50px;
+  bottom: 100px;
   left: 50%;
   -webkit-transform: translateX(-50%);
   -ms-transform: translateX(-50%);
@@ -7876,6 +7875,7 @@ footer.clean-footer.crev:before {
   font-weight: 800;
   line-height: .8;
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   background-size: cover;
   width: -webkit-max-content;

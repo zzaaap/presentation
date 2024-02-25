@@ -15,7 +15,7 @@ $(function () {
       scrollTrigger: {
         trigger: ".thecontainer",
         pin: true,
-        scrub: 0.5,
+        scrub: 1,
         // snap: 1 / (sections.length - 1),
         end: () => "+=" + document.querySelector(".thecontainer").offsetWidth
       }

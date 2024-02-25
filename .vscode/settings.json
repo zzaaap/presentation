@@ -1,0 +1,5 @@
+{
+    "livePreview.previewDebounceDelay": 2500,
+    "prettier.printWidth": 80,
+    "livePreview.defaultPreviewPath": "/presentation.html"
+}

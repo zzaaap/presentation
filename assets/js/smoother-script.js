@@ -7,7 +7,7 @@ $(function () {
 
   // create the smooth scroller FIRST!
   let smoother = ScrollSmoother.create({
-    smooth: 1,
+    smooth: 2,
     effects: true,
   });
 

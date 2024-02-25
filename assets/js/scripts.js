@@ -1,1387 +1,721 @@
-/*-----------------------------------------------------------------------------------
-
-    Theme Name: GeekFolio
-    Theme URI: http://
-    Description: Creative Agency & Portfolio
-    Author: UI-ThemeZ
-    Author URI: http://themeforest.net/user/UI-ThemeZ
-    Version: 1.0
-
------------------------------------------------------------------------------------*/
-
+/**
+ * -----------------------------------------------------------------------------------
+ *
+ *     Theme Name: Presentation
+ *     Theme URI: http://iambazzy.com
+ *     Description: Creative Portfolio
+ *     Author: zzapped
+ *     Author URI: http://zzapped.com
+ *     Version: 1.0
+ *
+ * -----------------------------------------------------------------------------------
+ *
+ * @format
+ */
 
 $(function () {
+  "use strict";
 
-    "use strict";
+  var wind = $(window);
 
-    var wind = $(window);
+  /* =============================================================================
+  -----------------------------  Smooth Scroll nav   -----------------------------
+  ============================================================================= */
 
+  $.scrollIt({
+    upKey: 38, // key code to navigate to the next section
+    downKey: 40, // key code to navigate to the previous section
+    easing: "linear", // the easing function for animation
+    scrollTime: 600, // how long (in ms) the animation takes
+    activeClass: "active", // class given to the active nav element
+    onPageChange: null, // function(pageIndex) that is called when page is changed
+    topOffset: -75, // offste (in px) for fixed top navigation
+  });
 
-    /* =============================================================================
-    -----------------------------  Smooth Scroll nav   -----------------------------
-    ============================================================================= */
+  /* =============================================================================
+  ------------------------------  Interactive work   -----------------------------
+  ============================================================================= */
 
+  $(".inter-links-center .links-text li").on("mouseenter", function () {
+    var tab_id = $(this).attr("data-tab");
+    $(".links-text li").removeClass("current");
+    $(this).addClass("current");
 
-    $.scrollIt({
-        upKey: 38,                // key code to navigate to the next section
-        downKey: 40,              // key code to navigate to the previous section
-        easing: 'swing',          // the easing function for animation
-        scrollTime: 1500,          // how long (in ms) the animation takes
-        activeClass: 'active',    // class given to the active nav element
-        onPageChange: null,       // function(pageIndex) that is called when page is changed
-        topOffset: 0            // offste (in px) for fixed top navigation
-    });
+    $(".links-img .img").removeClass("current");
+    $("#" + tab_id).addClass("current");
 
-
-    /* =============================================================================
-    --------------------------------  Navbar Menu   --------------------------------
-    ============================================================================= */
-
-    $('.navbar .dropdown').hover(function () {
-        $(this).find('.dropdown-menu').addClass('show');
-    }, function () {
-        $(this).find('.dropdown-menu').removeClass('show')
-    });
-
-    $('.navbar .dropdown-item').hover(function () {
-        $(this).find('.dropdown-side').addClass('show');
-    }, function () {
-        $(this).find('.dropdown-side').removeClass('show')
-    });
-
-    $(".navbar .search-form").on("click", ".search-icon", function () {
-
-        $(".navbar .search-form").toggleClass("open");
-
-        if ($(".navbar .search-form").hasClass('open')) {
-
-            $(".search-form .close-search").slideDown();
-
-        } else {
-
-            $(".search-form .close-search").slideUp();
-        }
-    });
-
-    $(".navbar").on("click", ".navbar-toggler", function () {
-
-        $(".navbar .navbar-collapse").toggleClass("show");
-    });
-
-    wind.on("scroll", function () {
-
-        var bodyScroll = wind.scrollTop(),
-            navbar = $(".navbar"),
-            logo = $(".navbar.change .logo> img");
-
-        if (bodyScroll > 300) {
-
-            navbar.addClass("nav-scroll");
-            logo.attr('src', 'assets/imgs/logo-dark.png');
-
-        } else {
-
-            navbar.removeClass("nav-scroll");
-            logo.attr('src', 'assets/imgs/logo-light.png');
-        }
-    });
-
-    function noScroll() {
-        window.scrollTo(0, 0);
+    if ($(this).hasClass("current")) {
+      return false;
     }
-
-    $('.navbar .menu-icon').on('click', function () {
-
-        $('.hamenu').addClass("open");
-
-        $('.hamenu').animate({ left: 0 });
-
-    });
-
-    $('.hamenu .close-menu, .one-scroll .menu-links .main-menu > li').on('click', function () {
-
-        $('.hamenu').removeClass("open").delay(300).animate({ left: "-100%" });
-        $('.hamenu .menu-links .main-menu .dmenu, .hamenu .menu-links .main-menu .sub-dmenu').removeClass("dopen");
-        $('.hamenu .menu-links .main-menu .sub-menu, .hamenu .menu-links .main-menu .sub-menu2').slideUp();
-
-    });
-
-    $('.hamenu .menu-links .main-menu > li').on('mouseenter', function () {
-        $(this).removeClass('hoverd').siblings().addClass('hoverd');
-    });
-
-    $('.hamenu .menu-links .main-menu > li').on('mouseleave', function () {
-        $(this).removeClass('hoverd').siblings().removeClass('hoverd');
-    });
-
-
-    $('.main-menu > li .dmenu').on('click', function () {
-        $(this).parent().parent().find(".sub-menu").toggleClass("sub-open").slideToggle();
-        $(this).toggleClass("dopen");
-    });
-
-    $('.sub-menu > ul > li .sub-dmenu').on('click', function () {
-        $(this).parent().parent().find(".sub-menu2").toggleClass("sub-open").slideToggle();
-        $(this).toggleClass("dopen");
-    });
-
-    /* =============================================================================
-    ------------------------------  Parallax Swiper   ------------------------------
-    ============================================================================= */
-
-
-    var parallaxSlider;
-    var parallaxSliderOptions = {
-        speed: 1500,
-        autoplay: {
-            delay: 5000,
-        },
-        parallax: true,
-        loop: true,
-
-        on: {
-            init: function () {
-                var swiper = this;
-                for (var i = 0; i < swiper.slides.length; i++) {
-                    $(swiper.slides[i])
-                        .find('.bg-img')
-                        .attr({
-                            'data-swiper-parallax': 0.75 * swiper.width
-                        });
-                }
-            },
-            resize: function () {
-                this.update();
-            }
-        },
-
-        pagination: {
-            el: '.slider-prlx .swiper-pagination',
-            type: 'fraction',
-            clickable: true
-        },
-
-        navigation: {
-            nextEl: '.slider-prlx .swiper-button-next',
-            prevEl: '.slider-prlx .swiper-button-prev'
-        }
-    };
-    parallaxSlider = new Swiper('.slider-prlx .parallax-slider', parallaxSliderOptions);
-
-    var parallaxShowCase;
-    var parallaxShowCaseOptions = {
-        speed: 1500,
-        autoplay: {
-            delay: 5000,
-        },
-        parallax: true,
-        mousewheel: true,
-        loop: true,
-
-        on: {
-            init: function () {
-                var swiper = this;
-                for (var i = 0; i < swiper.slides.length; i++) {
-                    $(swiper.slides[i])
-                        .find('.bg-img')
-                        .attr({
-                            'data-swiper-parallax': 0.75 * swiper.width
-                        });
-                }
-            },
-            resize: function () {
-                this.update();
-            }
-        },
-
-        pagination: {
-            el: '.full-showcase .parallax-slider .swiper-pagination',
-            clickable: true,
-            renderBullet: function (index, className) {
-                return '<span class="' + className + '">' + '<svg class="fp-arc-loader" width="16" height="16" viewBox="0 0 16 16">' +
-                    '<circle class="path" cx="8" cy="8" r="5.5" fill="none" transform="rotate(-90 8 8)" stroke="#FFF"' +
-                    'stroke-opacity="1" stroke-width="1px"></circle>' +
-                    '<circle cx="8" cy="8" r="3" fill="#FFF"></circle>' +
-                    '</svg></span>';
-            },
-
-        },
-
-        navigation: {
-            nextEl: '.full-showcase .parallax-slider .swiper-button-next',
-            prevEl: '.full-showcase .parallax-slider .swiper-button-prev'
-        }
-    };
-    parallaxShowCase = new Swiper('.full-showcase .parallax-slider', parallaxShowCaseOptions);
-
-
-    /* ===============================  Carousel slider  =============================== */
-
-    var galleryText = new Swiper('.carousel-slider .gallery-text .swiper-container', {
-        spaceBetween: 30,
-        slidesPerView: 1,
-        direction: 'vertical',
-        loop: true,
-        loopedSlides: 4,
-        touchRatio: 0.2,
-        slideToClickedSlide: true,
-        mousewheel: true,
-        speed: 1500,
-    });
-
-    var galleryImg = new Swiper('.carousel-slider .gallery-img .swiper-container', {
-        spaceBetween: 80,
-        slidesPerView: 2,
-        centeredSlides: true,
-        loop: true,
-        loopedSlides: 4,
-        mousewheel: true,
-        speed: 1500,
-        navigation: {
-            nextEl: '.carousel-slider .swiper-controls .swiper-button-next',
-            prevEl: '.carousel-slider .swiper-controls .swiper-button-prev',
-        },
-        pagination: {
-            el: '.carousel-slider .swiper-pagination',
-            clickable: true,
-            renderBullet: function (index, className) {
-                return '<span class="' + className + '">' + '<svg class="fp-arc-loader" width="16" height="16" viewBox="0 0 16 16">' +
-                    '<circle class="path" cx="8" cy="8" r="5.5" fill="none" transform="rotate(-90 8 8)" stroke="#FFF"' +
-                    'stroke-opacity="1" stroke-width="1px"></circle>' +
-                    '<circle cx="8" cy="8" r="3" fill="#FFF"></circle>' +
-                    '</svg></span>';
-            },
-
-        },
-        keyboard: {
-            enabled: true,
-        },
-
-        breakpoints: {
-            0: {
-                slidesPerView: 1,
-                spaceBetween: 30,
-            },
-            640: {
-                slidesPerView: 1,
-                spaceBetween: 30,
-            },
-            768: {
-                slidesPerView: 2,
-                spaceBetween: 40,
-            },
-            1024: {
-                slidesPerView: 2,
-            },
-        }
-    });
-
-    galleryImg.on("slideChangeTransitionStart", function () {
-        galleryText.slideTo(galleryImg.activeIndex);
-    });
-    galleryText.on("transitionStart", function () {
-        galleryImg.slideTo(galleryText.activeIndex);
-    });
-
-
-    /* ===============================  half slider  =============================== */
-
-    var halfText = new Swiper('.half-slider .gallery-text .swiper-container', {
-        spaceBetween: 100,
-        centeredSlides: true,
-        slidesPerView: 2,
-        touchRatio: 0.2,
-        slideToClickedSlide: true,
-        loopedSlides: 4,
-        mousewheel: true,
-        speed: 1500,
-        breakpoints: {
-            0: {
-                spaceBetween: 10,
-                slidesPerView: 1,
-                centeredSlides: false,
-            },
-            640: {
-                spaceBetween: 30,
-                slidesPerView: 1,
-                centeredSlides: false,
-            },
-            768: {
-                spaceBetween: 50,
-                slidesPerView: 1,
-                centeredSlides: false,
-            },
-            1024: {
-                spaceBetween: 100,
-                slidesPerView: 2,
-                centeredSlides: true,
-            },
-        }
-    });
-
-    var halfImg = new Swiper('.half-slider .gallery-img .swiper-container', {
-        spaceBetween: 0,
-        centeredSlides: true,
-        loopedSlides: 4,
-        mousewheel: true,
-        speed: 1500,
-        navigation: {
-            nextEl: '.half-slider .swiper-controls .swiper-button-next',
-            prevEl: '.half-slider .swiper-controls .swiper-button-prev',
-        },
-        pagination: {
-            el: '.half-slider .swiper-pagination',
-            clickable: true,
-            renderBullet: function (index, className) {
-                return '<span class="' + className + '">' + '<svg class="fp-arc-loader" width="16" height="16" viewBox="0 0 16 16">' +
-                    '<circle class="path" cx="8" cy="8" r="5.5" fill="none" transform="rotate(-90 8 8)" stroke="#FFF"' +
-                    'stroke-opacity="1" stroke-width="1px"></circle>' +
-                    '<circle cx="8" cy="8" r="3" fill="#FFF"></circle>' +
-                    '</svg></span>';
-            },
-
-        },
-        keyboard: {
-            enabled: true,
-        },
-        thumbs: {
-            swiper: halfText
-        },
-    });
-
-    halfImg.on("slideChangeTransitionStart", function () {
-        halfText.slideTo(halfImg.activeIndex);
-    });
-    halfText.on("transitionStart", function () {
-        halfImg.slideTo(halfText.activeIndex);
-    });
-
-
-    /* ===============================  crev slider  =============================== */
-
-    var galleryTextCrev = new Swiper('.crev-slider .gallery-text .swiper-container', {
-        spaceBetween: 30,
-        slidesPerView: 1,
-        loop: true,
-        speed: 1500,
-        navigation: {
-            nextEl: '.crev-slider .swiper-controls .swiper-button-next',
-            prevEl: '.crev-slider .swiper-controls .swiper-button-prev',
-        },
-        pagination: {
-            el: ".crev-slider .swiper-pagination",
-            type: "fraction",
-        },
-    });
-
-    var galleryImgCrev = new Swiper('.crev-slider .gallery-img .swiper-container', {
-        spaceBetween: 30,
-        slidesPerView: 1,
-        effect: 'fade',
-        loop: true,
-        speed: 1500,
-    });
-
-    galleryImgCrev.on("slideChangeTransitionStart", function () {
-        galleryTextCrev.slideTo(galleryImgCrev.activeIndex);
-    });
-    galleryTextCrev.on("transitionStart", function () {
-        galleryImgCrev.slideTo(galleryTextCrev.activeIndex);
-    });
-
-
-    /* =============================================================================
-    ------------------------------  Interactive work   -----------------------------
-    ============================================================================= */
-
-    $('.inter-links-center .links-text li').on('mouseenter', function () {
-        var tab_id = $(this).attr('data-tab');
-        $('.links-text li').removeClass('current');
-        $(this).addClass('current');
-
-        $('.links-img .img').removeClass('current');
-        $("#" + tab_id).addClass('current');
-
-        if ($(this).hasClass('current')) {
-            return false;
-        }
-    });
-
-    $('.inter-links-center .links-text li').on('mouseleave', function () {
-        $('.links-text li').removeClass('current');
-        $('.links-img .img').removeClass('current');
-    });
-
-
-    $('.inter-links-center .links-text li').on('mouseenter', function () {
-        $(this).removeClass('no-active').siblings().addClass('no-active');
-    });
-
-    $('.inter-links-center .links-text li').on('mouseleave', function () {
-        $('.inter-links-center .links-text li').removeClass('no-active');
-    });
-
-
-    /* =============================================================================
-    ------------------------------  Data Background   ------------------------------
-    ============================================================================= */
-
-    var pageSection = $(".bg-img, section");
-    pageSection.each(function (indx) {
-
-        if ($(this).attr("data-background")) {
-            $(this).css("background-image", "url(" + $(this).data("background") + ")");
-        }
-    });
-
-    var pageSectionColor = $(".bg-solid-color, section");
-    pageSectionColor.each(function (indx) {
-
-        var color = $(this).attr("data-solid-color");
-
-        if ($(this).attr("data-solid-color")) {
-            $(this).css("background-color", color);
-        }
-    });
-
-
-    /* =============================================================================
-    ------------------------------  Interactive work   -----------------------------
-    ============================================================================= */
-
-    $('.inter-fixed-text .links-img .img').on('mouseenter', function () {
-        var tab_id = $(this).attr('data-tab');
-        $('.links-img .img').removeClass('current');
-        $(this).addClass('current');
-
-        $('.links-text li').removeClass('current');
-        $("#" + tab_id).addClass('current');
-
-        if ($(this).hasClass('current')) {
-            return false;
-        }
-    });
-
-    $('.inter-fixed-text .links-img .img').on('mouseleave', function () {
-        $('.links-text li').removeClass('current');
-        $('.links-img .img').removeClass('current');
-    });
-
-
-    /* =============================================================================
-    -----------------------------------  Tabs  -------------------------------------
-    ============================================================================= */
-
-    $('#tabs .tab-links').on('click', '.item-link', function () {
-
-        var tab_id = $(this).attr('data-tab');
-
-        $('#tabs .tab-links .item-link').removeClass('current');
-        $(this).addClass('current');
-
-        $('.tab-content').hide();
-        $("#" + tab_id).show();
-
-    });
-
-    $('#tabs-fade .tab-links').on('click', '.item-link', function () {
-
-        var tab2_id = $(this).attr('data-tab');
-
-        $('#tabs-fade .tab-links .item-link').removeClass('current');
-        $(this).addClass('current');
-
-        $('.tab-content').fadeOut();
-        $("#" + tab2_id).fadeIn();
-
-    });
-
-
-    /* ===============================  Work Tabs  =============================== */
-
-    $('.portfolio-tab .cluom').on('mouseenter', function () {
-        var tab_id = $(this).attr('data-tab');
-        $('.portfolio-tab .cluom').removeClass('current');
-        $(this).addClass('current');
-
-        $('.portfolio-tab .glry-img .tab-img ').removeClass('current');
-        $("#" + tab_id).addClass('current');
-
-        if ($(this).hasClass('current')) {
-            return false;
-        }
-    });
-
-
-    /* ===============================  Team Tabs  =============================== */
-
-    $('.team-tab .cluom').on('mouseenter', function () {
-        var tab_id = $(this).attr('data-tab');
-        $('.team-tab .cluom').removeClass('current');
-        $(this).addClass('current');
-
-        $('.team-tab .glry-img .tab-img ').removeClass('current');
-        $("#" + tab_id).addClass('current');
-
-        if ($(this).hasClass('current')) {
-            return false;
-        }
-    });
-
-
-    /* =============================================================================
-    --------------------------------  Accordion  -----------------------------------
-    ============================================================================= */
-
-    $(".accordion").on("click", ".title", function () {
-
-        $(this).next().slideDown();
-
-        $(".accordion-info").not($(this).next()).slideUp();
-
-    });
-
-    $(".accordion").on("click", ".item", function () {
-
-        $(this).addClass("active").siblings().removeClass("active");
-
-    });
-
-
-    /* =============================================================================
-    ---------------------------------  Tolltip  ------------------------------------
-    ============================================================================= */
-
-    $('[data-tooltip-tit]').hover(function () {
-        $('<div class="div-tooltip-tit"></div>').text($(this).attr('data-tooltip-tit')).appendTo('body').fadeIn();
-    }, function () {
-        $('.div-tooltip-tit').remove();
-    }).mousemove(function (e) {
-        $('.div-tooltip-tit').css({ top: e.pageY + 10, left: e.pageX + 20 })
-    });
-
-    $('[data-tooltip-sub]').hover(function () {
-        $('<div class="div-tooltip-sub"></div>').text($(this).attr('data-tooltip-sub')).appendTo('body').fadeIn();
-    }, function () {
-        $('.div-tooltip-sub').remove();
-    }).mousemove(function (e) {
-        $('.div-tooltip-sub').css({ top: e.pageY + (-20), left: e.pageX + 30 })
-    });
-
-
-    /* =============================================================================
-    -------------------------------  Progress Bar  ---------------------------------
-    ============================================================================= */
-
-    wind.on('scroll', function () {
-        $(".skill-progress .progres").each(function () {
-            var bottom_of_object =
-                $(this).offset().top + $(this).outerHeight();
-            var bottom_of_window =
-                $(window).scrollTop() + $(window).height();
-            var myVal = $(this).attr('data-value');
-            if (bottom_of_window > bottom_of_object) {
-                $(this).css({
-                    width: myVal
-                });
-            }
-        });
-    });
-
-
-    /* =============================================================================
-    ------------------------------  Parallax Items   -----------------------------
-    ============================================================================= */
-
-    // Get the target elements
-    const parallaxTargets = document.querySelectorAll('.parallax');
-
-    // Get the mouse position
-    let mouseX = 0;
-    let mouseY = 0;
-    document.addEventListener('mousemove', function (event) {
-        mouseX = event.clientX;
-        mouseY = event.clientY;
-    });
-
-    // Update the target elements' position on each animation frame
-    let rafId = null;
-    function updateParallax() {
-        // Loop through each target element
-        parallaxTargets.forEach(target => {
-            // Get the target's speed
-            let speed = target.dataset.speed;
-
-            // Calculate the new position based on the mouse position and speed
-            let x = (window.innerWidth / 2 - mouseX) * speed;
-            let y = (window.innerHeight / 2 - mouseY) * speed;
-            target.style.transform = `translate3d(${x / 10}rem, ${y / 10}rem, 0)`;
-        });
-
-        // Schedule the next animation frame
-        rafId = requestAnimationFrame(updateParallax);
+  });
+
+  $(".inter-links-center .links-text li").on("mouseleave", function () {
+    $(".links-text li").removeClass("current");
+    $(".links-img .img").removeClass("current");
+  });
+
+  $(".inter-links-center .links-text li").on("mouseenter", function () {
+    $(this).removeClass("no-active").siblings().addClass("no-active");
+  });
+
+  $(".inter-links-center .links-text li").on("mouseleave", function () {
+    $(".inter-links-center .links-text li").removeClass("no-active");
+  });
+
+  /* =============================================================================
+  ------------------------------  Data Background   ------------------------------
+  ============================================================================= */
+
+  var pageSection = $(".bg-img, section");
+  pageSection.each(function (indx) {
+    if ($(this).attr("data-background")) {
+      $(this).css(
+        "background-image",
+        "url(" + $(this).data("background") + ")"
+      );
     }
+  });
 
-    // Start the parallax animation
-    updateParallax();
+  var pageSectionColor = $(".bg-solid-color, section");
+  pageSectionColor.each(function (indx) {
+    var color = $(this).attr("data-solid-color");
 
+    if ($(this).attr("data-solid-color")) {
+      $(this).css("background-color", color);
+    }
+  });
 
-    /* =============================================================================
-    -----------------------------  Trigger Plugins  --------------------------------
-    ============================================================================= */
+  /* =============================================================================
+  ------------------------------  Interactive work   -----------------------------
+  ============================================================================= */
 
+  $(".inter-fixed-text .links-img .img").on("mouseenter", function () {
+    var tab_id = $(this).attr("data-tab");
+    $(".links-img .img").removeClass("current");
+    $(this).addClass("current");
 
-    /* ========== Sticky ========== */
+    $(".links-text li").removeClass("current");
+    $("#" + tab_id).addClass("current");
 
-    $(".sticky-item").stick_in_parent();
+    if ($(this).hasClass("current")) {
+      return false;
+    }
+  });
 
+  $(".inter-fixed-text .links-img .img").on("mouseleave", function () {
+    $(".links-text li").removeClass("current");
+    $(".links-img .img").removeClass("current");
+  });
 
-    /* ========== YouTubePopUp ========== */
+  /* =============================================================================
+  -------------------------------  Progress Bar  ---------------------------------
+  ============================================================================= */
 
-    $("a.vid").YouTubePopUp();
+  wind.on("scroll", function () {
+    $(".skill-progress .progres").each(function () {
+      var bottom_of_object = $(this).offset().top + $(this).outerHeight();
+      var bottom_of_window = $(window).scrollTop() + $(window).height();
+      var myVal = $(this).attr("data-value");
+      if (bottom_of_window > bottom_of_object) {
+        $(this).css({
+          width: myVal,
+        });
+      }
+    });
+  });
 
+  /* =============================================================================
+  ------------------------------  Parallax Items   -----------------------------
+  ============================================================================= */
 
-    /* ========== parallaxie ========== */
+  // Get the target elements
+  const parallaxTargets = document.querySelectorAll(".parallax");
 
-    $('.parallaxie').parallaxie({
-        speed: 0.8,
-        size: "cover"
+  // Get the mouse position
+  let mouseX = 0;
+  let mouseY = 0;
+  document.addEventListener("mousemove", function (event) {
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+  });
+
+  // Update the target elements' position on each animation frame
+  let rafId = null;
+  function updateParallax() {
+    // Loop through each target element
+    parallaxTargets.forEach((target) => {
+      // Get the target's speed
+      let speed = target.dataset.speed;
+
+      // Calculate the new position based on the mouse position and speed
+      let x = (window.innerWidth / 2 - mouseX) * speed;
+      let y = (window.innerHeight / 2 - mouseY) * speed;
+      target.style.transform = `translate3d(${x / 10}rem, ${y / 10}rem, 0)`;
     });
 
+    // Schedule the next animation frame
+    rafId = requestAnimationFrame(updateParallax);
+  }
 
-    /* ========== paroller ========== */
+  // Start the parallax animation
+  updateParallax();
 
-    $('.my-paroller').paroller();
+  /* =============================================================================
+  -----------------------------  Trigger Plugins  --------------------------------
+  ============================================================================= */
 
+  /* ========== Sticky ========== */
 
-    /* ========== magnificPopup ========== */
+  $(".sticky-item").stick_in_parent();
 
-    $('.popup-img , .gallery').magnificPopup({
-        delegate: '.popimg',
-        type: 'image',
-        gallery: {
-            enabled: true
-        }
-    });
+  /* ========== parallaxie ========== */
 
+  $(".parallaxie").parallaxie({
+    speed: 0.8,
+    size: "cover",
+  });
 
-    /* =========== justifiedGallery =========== */
+  /* ========== paroller ========== */
 
-    $('.justified-gallery').justifiedGallery({
-        rowHeight: 400,
-        lastRow: 'nojustify',
-        margins: 15
-    });
+  $(".my-paroller").paroller();
 
+  /* =========== justifiedGallery =========== */
 
-    /* =========== hover3d =========== */
+  $(".justified-gallery").justifiedGallery({
+    rowHeight: 400,
+    lastRow: "nojustify",
+    margins: 15,
+  });
 
-    $(".hover3d").hover3d({
-        selector: ".hover3d-child",
-        invert: true
-    });
+  /* =========== hover3d =========== */
 
+  $(".hover3d").hover3d({
+    selector: ".hover3d-child",
+    invert: true,
+  });
 
-    /* ===========  Splitting  =========== */
+  /* ===========  Splitting  =========== */
 
-    Splitting();
-
+  Splitting();
 });
 
-
 /* =============================================================================
------------------------------  cursor Animation  -----------------------------
+-----------------------------  Cursor Animation  -----------------------------
 ============================================================================= */
 
 (function () {
-    const link = document.querySelectorAll('.hover-this');
-    const cursor = document.querySelector('.cursor');
-    const animateit = function (e) {
-        const hoverAnim = this.querySelector('.hover-anim');
-        const { offsetX: x, offsetY: y } = e,
-            { offsetWidth: width, offsetHeight: height } = this,
-            move = 25,
-            xMove = x / width * (move * 2) - move,
-            yMove = y / height * (move * 2) - move;
-        hoverAnim.style.transform = `translate(${xMove}px, ${yMove}px)`;
-        if (e.type === 'mouseleave') hoverAnim.style.transform = '';
-    };
-    const editCursor = e => {
-        const { clientX: x, clientY: y } = e;
-        cursor.style.left = x + 'px';
-        cursor.style.top = y + 'px';
-    };
-    link.forEach(b => b.addEventListener('mousemove', animateit));
-    link.forEach(b => b.addEventListener('mouseleave', animateit));
-    window.addEventListener('mousemove', editCursor);
+  const link = document.querySelectorAll(".hover-this");
+  const cursor = document.querySelector(".cursor");
+  const animateit = function (e) {
+    const hoverAnim = this.querySelector(".hover-anim");
+    const { offsetX: x, offsetY: y } = e,
+      { offsetWidth: width, offsetHeight: height } = this,
+      move = 25,
+      xMove = (x / width) * (move * 2) - move,
+      yMove = (y / height) * (move * 2) - move;
+    hoverAnim.style.transform = `translate(${xMove}px, ${yMove}px)`;
+    if (e.type === "mouseleave") hoverAnim.style.transform = "";
+  };
+  const editCursor = (e) => {
+    const { clientX: x, clientY: y } = e;
+    cursor.style.left = x + "px";
+    cursor.style.top = y + "px";
+  };
+  link.forEach((b) => b.addEventListener("mousemove", animateit));
+  link.forEach((b) => b.addEventListener("mouseleave", animateit));
+  window.addEventListener("mousemove", editCursor);
 
-    $("a, .cursor-pointer").hover(
-        function () {
-            $(".cursor").addClass("cursor-active");
-        }, function () {
-            $(".cursor").removeClass("cursor-active");
-        }
-    );
+  $("a, .cursor-pointer").hover(
+    function () {
+      $(".cursor").addClass("cursor-active");
+    },
+    function () {
+      $(".cursor").removeClass("cursor-active");
+    }
+  )
 
+  /* =============================================================================
+  -----------------------------  Text Animation  -----------------------------
+  ============================================================================= */
 
-    /* =============================================================================
-    -----------------------------  Text Animation  -----------------------------
-    ============================================================================= */
+  let elements = document.querySelectorAll(".rolling-text");
 
+  elements.forEach((element) => {
+    let innerText = element.innerText;
+    element.innerHTML = "";
 
-    let elements = document.querySelectorAll(".rolling-text");
+    let textContainer = document.createElement("div");
+    textContainer.classList.add("block");
 
-    elements.forEach((element) => {
-        let innerText = element.innerText;
-        element.innerHTML = "";
+    for (let letter of innerText) {
+      let span = document.createElement("span");
+      span.innerText = letter.trim() === "" ? "\xa0" : letter;
+      span.classList.add("letter");
+      textContainer.appendChild(span);
+    }
 
-        let textContainer = document.createElement("div");
-        textContainer.classList.add("block");
+    element.appendChild(textContainer);
+    element.appendChild(textContainer.cloneNode(true));
+  });
 
-        for (let letter of innerText) {
-            let span = document.createElement("span");
-            span.innerText = letter.trim() === "" ? "\xa0" : letter;
-            span.classList.add("letter");
-            textContainer.appendChild(span);
-        }
-
-        element.appendChild(textContainer);
-        element.appendChild(textContainer.cloneNode(true));
+  elements.forEach((element) => {
+    element.addEventListener("mouseover", () => {
+      element.classList.remove("play");
     });
-
-    elements.forEach((element) => {
-        element.addEventListener("mouseover", () => {
-            element.classList.remove("play");
-        });
-    });
+  });
 })();
 
+  /* =============================================================================
+  ---------------------------------  Preloader  ----------------------------------
+  ============================================================================= */
 
-/* =============================================================================
-////////////////////////////////////////////////////////////////////////////////
-============================================================================= */
+  var body = $("body");
+  body.addClass("loaded");
+  setTimeout(function () {
+    body.removeClass("loaded");
+  }, 500);
 
-$(window).on("load", function () {
+  /* =============================================================================
+  ------------------------------  Parallax image  --------------------------------
+  ============================================================================= */
 
+  var imageUp = document.getElementsByClassName("thumparallax");
+  new simpleParallax(imageUp, {
+    delay: 1,
+    scale: 1.2,
+  });
 
-    /* =============================================================================
-    ---------------------------------  Preloader  ----------------------------------
-    ============================================================================= */
+  var imageDown = document.getElementsByClassName("thumparallax-down");
+  new simpleParallax(imageDown, {
+    orientation: "down",
+    delay: 1,
+    scale: 1.2,
+  });
 
-    var body = $('body');
-    body.addClass('loaded');
-    setTimeout(function () {
-        body.removeClass('loaded');
-    }, 1500);
+  /* =============================================================================
+  -----------------------------  isotope Masonery   ------------------------------
+  ============================================================================= */
 
+  $(".gallery").isotope({
+    itemSelector: ".items",
+  });
 
-    /* =============================================================================
-    ------------------------------  Parallax image  --------------------------------
-    ============================================================================= */
+  // isotope
+  $(".gallery2").isotope({
+    // options
+    itemSelector: ".items",
+    masonry: {
+      // use element for option
+      columnWidth: ".width2",
+    },
+  });
 
-    var imageUp = document.getElementsByClassName('thumparallax');
-    new simpleParallax(imageUp, {
-        delay: 1,
-        scale: 1.2
-    });
+  var $gallery = $(".gallery , .gallery2").isotope();
 
-    var imageDown = document.getElementsByClassName('thumparallax-down');
-    new simpleParallax(imageDown, {
-        orientation: 'down',
-        delay: 1,
-        scale: 1.2
-    });
+  $(".filtering").on("click", "span", function () {
+    var filterValue = $(this).attr("data-filter");
+    $gallery.isotope({ filter: filterValue });
+  });
 
-
-    /* =============================================================================
-    -----------------------------  isotope Masonery   ------------------------------
-    ============================================================================= */
-
-    $('.gallery').isotope({
-        itemSelector: '.items'
-    });
-
-    // isotope
-    $('.gallery2').isotope({
-        // options
-        itemSelector: '.items',
-        masonry: {
-            // use element for option
-            columnWidth: '.width2'
-        }
-    });
-
-    var $gallery = $('.gallery , .gallery2').isotope();
-
-    $('.filtering').on('click', 'span', function () {
-        var filterValue = $(this).attr('data-filter');
-        $gallery.isotope({ filter: filterValue });
-    });
-
-    $('.filtering').on('click', 'span', function () {
-        $(this).addClass('active').siblings().removeClass('active');
-    });
-
-
-    /* =============================================================================
-    -----------------------------  Contact Valdition   -----------------------------
-    ============================================================================= */
-
-    $('#contact-form').validator();
-
-    $('#contact-form').on('submit', function (e) {
-        if (!e.isDefaultPrevented()) {
-            var url = "contact.php";
-
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: $(this).serialize(),
-                success: function (data) {
-                    var messageAlert = 'alert-' + data.type;
-                    var messageText = data.message;
-
-                    var alertBox = '<div class="alert ' + messageAlert + ' alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + messageText + '</div>';
-                    if (messageAlert && messageText) {
-                        $('#contact-form').find('.messages').html(alertBox);
-                        $('#contact-form')[0].reset();
-                    }
-                }
-            });
-            return false;
-        }
-    });
-
-});
-
+  $(".filtering").on("click", "span", function () {
+    $(this).addClass("active").siblings().removeClass("active");
+  });
 
 /* =============================================================================
 -----------------------------  Button scroll up   ------------------------------
 ============================================================================= */
 
 $(document).ready(function () {
+  "use strict";
 
-    "use strict";
-
-    var progressPath = document.querySelector('.progress-wrap path');
-    var pathLength = progressPath.getTotalLength();
-    progressPath.style.transition = progressPath.style.WebkitTransition = 'none';
-    progressPath.style.strokeDasharray = pathLength + ' ' + pathLength;
-    progressPath.style.strokeDashoffset = pathLength;
-    progressPath.getBoundingClientRect();
-    progressPath.style.transition = progressPath.style.WebkitTransition = 'stroke-dashoffset 10ms linear';
-    var updateProgress = function () {
-        var scroll = $(window).scrollTop();
-        var height = $(document).height() - $(window).height();
-        var progress = pathLength - (scroll * pathLength / height);
-        progressPath.style.strokeDashoffset = progress;
+  var progressPath = document.querySelector(".progress-wrap path");
+  var pathLength = progressPath.getTotalLength();
+  progressPath.style.transition = progressPath.style.WebkitTransition = "none";
+  progressPath.style.strokeDasharray = pathLength + " " + pathLength;
+  progressPath.style.strokeDashoffset = pathLength;
+  progressPath.getBoundingClientRect();
+  progressPath.style.transition = progressPath.style.WebkitTransition =
+    "stroke-dashoffset 10ms linear";
+  var updateProgress = function () {
+    var scroll = $(window).scrollTop();
+    var height = $(document).height() - $(window).height();
+    var progress = pathLength - (scroll * pathLength) / height;
+    progressPath.style.strokeDashoffset = progress;
+  };
+  updateProgress();
+  $(window).scroll(updateProgress);
+  var offset = 150;
+  var duration = 550;
+  jQuery(window).on("scroll", function () {
+    if (jQuery(this).scrollTop() > offset) {
+      jQuery(".progress-wrap").addClass("active-progress");
+    } else {
+      jQuery(".progress-wrap").removeClass("active-progress");
     }
-    updateProgress();
-    $(window).scroll(updateProgress);
-    var offset = 150;
-    var duration = 550;
-    jQuery(window).on('scroll', function () {
-        if (jQuery(this).scrollTop() > offset) {
-            jQuery('.progress-wrap').addClass('active-progress');
-        } else {
-            jQuery('.progress-wrap').removeClass('active-progress');
-        }
-    });
-    jQuery('.progress-wrap').on('click', function (event) {
-        event.preventDefault();
-        jQuery('html, body').animate({ scrollTop: 0 }, duration);
-        return false;
-    })
-
+  });
+  jQuery(".progress-wrap").on("click", function (event) {
+    event.preventDefault();
+    jQuery("html, body").animate({ scrollTop: 0 }, duration);
+    return false;
+  });
 });
-
 
 /* =============================================================================
 --------------------------------  Fade Header   --------------------------------
 ============================================================================= */
 
 $(window).scroll(function () {
-
-    var scrolled = $(this).scrollTop();
-    $('.fixed-slider .caption').css({
-        'transform': 'translate3d(0, ' + -(scrolled * 0.20) + 'px, 0)',
-        'opacity': 1 - scrolled / 600
-    });
-
+  var scrolled = $(this).scrollTop();
+  $(".fixed-slider .caption").css({
+    transform: "translate3d(0, " + -(scrolled * 0.2) + "px, 0)",
+    opacity: 1 - scrolled / 600,
+  });
 });
-
-
 
 /* =============================================================================
 -------------------------------  Wow Animation   -------------------------------
 ============================================================================= */
 
 wow = new WOW({
-    animateClass: 'animated',
-    offset: 100
+  animateClass: "animated",
+  offset: 100,
 });
 wow.init();
-
 
 /* =============================================================================
 ////////////////////////////////////////////////////////////////////////////////
 ============================================================================= */
 
 $(function () {
+  "use strict";
 
+  /* ===============================  fixed-slider  =============================== */
 
-    "use strict";
+  var slidHeight = $(".fixed-slider").outerHeight();
 
+  $(".main-content").css({
+    marginTop: slidHeight,
+  });
 
-    /* ===============================  fixed-slider  =============================== */
+  
+  /* =============================================================================
+  -------------------------------  Preloader svg   -------------------------------
+  ============================================================================= */
 
-    var slidHeight = $(".fixed-slider").outerHeight();
+  const svg = document.getElementById("svg");
+  const tl = gsap.timeline();
+  const curve = "M0 502S175 272 500 272s500 230 500 230V0H0Z";
+  const flat = "M0 2S175 1 500 1s500 1 500 1V0H0Z";
 
-    $(".main-content").css({
-        marginTop: slidHeight
-    });
-
-
-
-    /* =============================================================================
-    ----------------------------  Swiper Data Controls   ---------------------------
-    ============================================================================= */
-
-    $('[data-carousel="swiper"]').each(function () {
-
-        var containe = $(this).find('[data-swiper="container"]').attr('id');
-        var pagination = $(this).find('[data-swiper="pagination"]').attr('id');
-        var prev = $(this).find('[data-swiper="prev"]').attr('id');
-        var next = $(this).find('[data-swiper="next"]').attr('id');
-        var items = $(this).data('items');
-        var autoplay = $(this).data('autoplay');
-        var iSlide = $(this).data('initial');
-        var loop = $(this).data('loop');
-        var parallax = $(this).data('parallax');
-        var space = $(this).data('space');
-        var speed = $(this).data('swiper-speed');
-        var center = $(this).data('center');
-        var effect = $(this).data('effect');
-        var direction = $(this).data('direction');
-        var mousewheel = $(this).data('mousewheel');
-
-        // Configuration
-        var conf = {
-
-        };
-
-        // Responsive
-        if ($(this).hasClass('swiper5')) {
-            var conf = {
-
-                breakpoints: {
-                    0: {
-                        slidesPerView: 2,
-                    },
-                    640: {
-                        slidesPerView: 3,
-                    },
-                    768: {
-                        slidesPerView: 3,
-                    },
-                    1024: {
-                        slidesPerView: 5,
-                    },
-                }
-            };
-        };
-
-        if ($(this).hasClass('swiper4')) {
-            var conf = {
-
-                breakpoints: {
-                    0: {
-                        slidesPerView: 1,
-                        spaceBetween: 10,
-                    },
-                    640: {
-                        slidesPerView: 2,
-                        spaceBetween: 30,
-                    },
-                    768: {
-                        slidesPerView: 3,
-                    },
-                    1024: {
-                        slidesPerView: 4,
-                    },
-                }
-            };
-        };
-
-        if ($(this).hasClass('serv-swiper')) {
-            var conf = {
-
-                breakpoints: {
-                    0: {
-                        slidesPerView: 1,
-                    },
-                    640: {
-                        slidesPerView: 1,
-                    },
-                    768: {
-                        slidesPerView: 2,
-                    },
-                    1024: {
-                        slidesPerView: 3,
-                    },
-                },
-
-                navigation: {
-                    nextEl: '.services .swiper-button-next',
-                    prevEl: '.services .swiper-button-prev'
-                }
-            };
-        };
-
-        if ($(this).hasClass('work-swiper-auto')) {
-            var conf = {
-
-                breakpoints: {
-                    0: {
-                        slidesPerView: 1,
-                    },
-                    640: {
-                        slidesPerView: 1,
-                    },
-                    768: {
-                        slidesPerView: 2,
-                    },
-                    1024: {
-                        slidesPerView: "auto",
-                    },
-                },
-
-                navigation: {
-                    nextEl: '.portfolio-carsouel .swiper-button-next',
-                    prevEl: '.portfolio-carsouel .swiper-button-prev'
-                }
-            };
-        };
-
-        if ($(this).hasClass('work-swiper-center')) {
-            var conf = {
-
-                breakpoints: {
-                    0: {
-                        slidesPerView: 1,
-                        spaceBetween: 30,
-                    },
-                    640: {
-                        slidesPerView: 1,
-                        spaceBetween: 30,
-                    },
-                    768: {
-                        slidesPerView: 1,
-                        spaceBetween: 50,
-                    },
-                    1024: {
-                        slidesPerView: 2,
-                    },
-                },
-
-                pagination: {
-                    el: '.portfolio-carsouel .swiper-pagination',
-                    clickable: true,
-                },
-
-                navigation: {
-                    nextEl: '.portfolio-carsouel .swiper-button-next',
-                    prevEl: '.portfolio-carsouel .swiper-button-prev'
-                },
-            };
-        };
-
-        if ($(this).hasClass('work-crus5')) {
-            var conf = {
-
-                breakpoints: {
-                    0: {
-                        slidesPerView: 1,
-                    },
-                    640: {
-                        slidesPerView: 2,
-                    },
-                    768: {
-                        slidesPerView: 3,
-                    },
-                    1024: {
-                        slidesPerView: 5,
-                    },
-                },
-
-                navigation: {
-                    nextEl: '.work-carsouel .swiper-button-next',
-                    prevEl: '.work-carsouel .swiper-button-prev'
-                }
-            };
-        };
-
-        if ($(this).hasClass('testim-swiper')) {
-            var conf = {
-
-                pagination: {
-                    el: '.testimonials .swiper-pagination',
-                    clickable: true,
-                },
-
-                navigation: {
-                    nextEl: '.testimonials .swiper-button-next',
-                    prevEl: '.testimonials .swiper-button-prev'
-                },
-            };
-        };
-
-        if ($(this).hasClass('testim1')) {
-            var conf = {
-
-                pagination: {
-                    el: '.testimonials-crev .swiper-pagination',
-                    clickable: true,
-                },
-
-                navigation: {
-                    nextEl: '.testimonials-crev .swiper-button-next',
-                    prevEl: '.testimonials-crev .swiper-button-prev'
-                },
-            };
-        };
-
-        if ($(this).hasClass('testim-swiper2')) {
-            var conf = {
-
-                breakpoints: {
-                    0: {
-                        slidesPerView: 1,
-                        spaceBetween: 0,
-                    },
-                    640: {
-                        slidesPerView: 1,
-                        spaceBetween: 0,
-                    },
-                    768: {
-                        slidesPerView: 1,
-                        spaceBetween: 0,
-                    },
-                    1024: {
-                        slidesPerView: 2,
-                    },
-                },
-
-                pagination: {
-                    el: '.testim-swiper2 .swiper-pagination',
-                    clickable: true,
-                },
-
-                navigation: {
-                    nextEl: '.testim-controls .swiper-button-next',
-                    prevEl: '.testim-controls .swiper-button-prev'
-                },
-            };
-        };
-
-        if ($(this).hasClass('testim2')) {
-            var conf = {
-
-                breakpoints: {
-                    0: {
-                        slidesPerView: 1,
-                        spaceBetween: 0,
-                    },
-                    640: {
-                        slidesPerView: 1,
-                        spaceBetween: 0,
-                    },
-                    768: {
-                        slidesPerView: 1,
-                        spaceBetween: 0,
-                    },
-                    1024: {
-                        slidesPerView: 2,
-                    },
-                },
-
-                pagination: {
-                    el: '.testim-crev .swiper-pagination',
-                    clickable: true,
-                },
-
-                navigation: {
-                    nextEl: '.testim-crev .swiper-button-next',
-                    prevEl: '.testim-crev .swiper-button-prev'
-                },
-            };
-        };
-
-        if (items) {
-            conf.slidesPerView = items
-        };
-        if (autoplay) {
-            conf.autoplay = autoplay
-        };
-        if (iSlide) {
-            conf.initialSlide = iSlide
-        };
-        if (center) {
-            conf.centeredSlides = center
-        };
-        if (loop) {
-            conf.loop = loop
-        };
-        if (parallax) {
-            conf.parallax = parallax
-        };
-        if (space) {
-            conf.spaceBetween = space
-        };
-        if (speed) {
-            conf.speed = speed
-        };
-        if (mousewheel) {
-            conf.mousewheel = mousewheel
-        };
-        if (effect) {
-            conf.effect = effect
-        };
-        if (direction) {
-            conf.direction = direction
-        };
-        if (prev) {
-            conf.prevButton = '#' + prev
-        };
-        if (next) {
-            conf.nextButton = '#' + next
-        };
-        if (pagination) {
-            conf.pagination = '#' + pagination,
-                conf.paginationClickable = true
-        };
-
-        // Initialization
-        if (containe) {
-            var initID = '#' + containe;
-            var init = new Swiper(initID, conf);
-        };
-    });
-
-
-    /* =============================================================================
-    -------------------------------  Preloader svg   -------------------------------
-    ============================================================================= */
-
-    const svg = document.getElementById("svg");
-    const tl = gsap.timeline();
-    const curve = "M0 502S175 272 500 272s500 230 500 230V0H0Z";
-    const flat = "M0 2S175 1 500 1s500 1 500 1V0H0Z";
-
-    tl.to(".loader-wrap-heading .load-text , .loader-wrap-heading .cont", {
-        delay: 1.5,
-        y: -100,
-        opacity: 0,
-    });
-    tl.to(svg, {
-        duration: 0.5,
-        attr: { d: curve },
-        ease: "power2.easeIn",
-    }).to(svg, {
-        duration: 0.5,
-        attr: { d: flat },
-        ease: "power2.easeOut",
-    });
-    tl.to(".loader-wrap", {
-        y: -1500,
-    });
-    tl.to(".loader-wrap", {
-        zIndex: -1,
-        display: "none",
-    });
-    tl.from(
-        "header",
-        {
-            y: 200,
-        },
-        "-=1.5"
-    );
-    tl.from(
-        "header .container",
-        {
-            y: 40,
-            opacity: 0,
-            delay: 0.3,
-        },
-        "-=1.5"
-    );
+  tl.to(".loader-wrap-heading .load-text , .loader-wrap-heading .cont", {
+      delay: 1.5,
+      y: -100,
+      opacity: 0,
+  });
+  tl.to(svg, {
+      duration: 0.5,
+      attr: { d: curve },
+      ease: "power2.easeIn",
+  }).to(svg, {
+      duration: 0.5,
+      attr: { d: flat },
+      ease: "power2.easeOut",
+  });
+  tl.to(".loader-wrap", {
+      y: -1500,
+  });
+  tl.to(".loader-wrap", {
+      zIndex: -1,
+      display: "none",
+  });
+  tl.from(
+      "header",
+      {
+          y: 200,
+      },
+      "-=1.5"
+  );
+  tl.from(
+      "header .container",
+      {
+          y: 40,
+          opacity: 0,
+          delay: 0.3,
+      },
+      "-=1.5"
+  );
 
 });
-
-
 
 $(function () {
-    var width = $(window).width();
-    if (width > 991) {
+  var width = $(window).width();
+  if (width > 991) {
+    ("use strict");
 
-        "use strict";
+    var wind = $(window);
 
-        var wind = $(window);
+    /* =============================================================================
+      -----------------------------  Portfolio Fixed  --------------------------------
+      ============================================================================= */
 
-        /* =============================================================================
-        -------------------------------  Smooth Footer   -------------------------------
-        ============================================================================= */
+    wind.on("scroll", function () {
+      $(".portfolio-fixed .sub-bg .cont").each(function () {
+        var bottom_of_object = $(this).offset().top + $(this).outerHeight();
+        var bottom_of_window = $(window).scrollTop() + $(window).height();
+        var tab_id = $(this).attr("data-tab");
+        if (bottom_of_window > bottom_of_object) {
+          $("#" + tab_id).addClass("current");
+          $(this).addClass("current");
+        } else {
+          $("#" + tab_id).removeClass("current");
+          $(this).removeClass("current");
+        }
+      });
+    });
+  }
+});
 
-        gsap.set('.footer-container', { yPercent: -50 })
-        const uncover = gsap.timeline({ paused: true })
-        uncover
-            .to('.footer-container', { yPercent: 0, ease: 'none' })
-            ;
+/* ============================================================================= 
+-----------------------------   Begin New Code   --------------------------------
+============================================================================= */
 
-        ScrollTrigger.create({
-            trigger: 'main',
-            start: 'bottom bottom',
-            end: '+=50%',
-            animation: uncover,
-            scrub: true,
-        });
+/* ------Great Horned Owl Sequence------  */
+gsap.set(".circle", { yPercent: -5});
+gsap.set(".dotsBlue", { yPercent: 10});
+gsap.set(".owlHorned", { yPercent: -20});
+gsap.set(".clusterGreat", { yPercent: 5});
 
+gsap.to(".circle", {
+  yPercent: 5,
+  ease: "none",
+  scrollTrigger: {
+    trigger: ".clusterGreat",
+    scrub: 1
+  }, 
+});
 
-        /* =============================================================================
-        -----------------------------  Portfolio Fixed  --------------------------------
-        ============================================================================= */
-
-        wind.on('scroll', function () {
-            $(".portfolio-fixed .sub-bg .cont").each(function () {
-                var bottom_of_object =
-                    $(this).offset().top + $(this).outerHeight();
-                var bottom_of_window =
-                    $(window).scrollTop() + $(window).height();
-                var tab_id = $(this).attr('data-tab');
-                if (bottom_of_window > bottom_of_object) {
-                    $("#" + tab_id).addClass('current');
-                    $(this).addClass('current');
-                } else {
-                    $("#" + tab_id).removeClass('current');
-                    $(this).removeClass('current');
-                }
-            });
-        });
-    }
+gsap.to(".dotsBlue", {
+  yPercent: -10,
+  ease: "none",
+  scrollTrigger: {
+    trigger: ".clusterGreat",
+    scrub: 1
+  }, 
 });
 
 
-$(function () {
-    var width = $(window).width();
-    if (width < 991) {
-
-        "use strict";
-
-        $(".navbar .navbar-nav").on("click", ".nav-link", function () {
-
-            $(".navbar .navbar-nav .dropdown .dropdown-menu").removeClass("show");
-
-            $(this).parent().find(".dropdown-menu").addClass("show");
-        });
-    }
+gsap.to(".owlHorned", {
+  yPercent: 20,
+  ease: "none",
+  scrollTrigger: {
+    trigger: ".clusterGreat",
+    scrub: 1
+  }, 
 });
+
+gsap.to(".caption", {
+  yPercent: 100,
+  ease: "none",
+  scrollTrigger: {
+    trigger: ".clusterGreat",
+  // markers:true,
+    end: "bottom center",
+    scrub: 1
+  }, 
+});
+
+gsap.to(".clusterGreat", {
+  yPercent: -5,
+  ease: "none",
+  scrollTrigger: {
+    trigger: ".clusterGreat",
+    end: "bottom center",
+    scrub: 1
+  }, 
+});
+
+
+
+/* ------Burrowing Owl Sequence------  */
+gsap.set(".triangle", { yPercent: 25, rotation:-90});
+gsap.set(".dotsWhite", { yPercent: 10});
+gsap.set(".owlBurrowing", { yPercent: -20});
+gsap.set(".clusterBurrowing", { yPercent: 5});
+
+gsap.to(".triangle", {
+  yPercent: -5,
+  rotation: 40,
+  ease: "none",
+  scrollTrigger: {
+    trigger: ".clusterBurrowing",
+    scrub: 1
+  }, 
+});
+
+gsap.to(".dotsWhite", {
+  yPercent: -10,
+  ease: "none",
+  scrollTrigger: {
+    trigger: ".clusterBurrowing",
+    scrub: 1
+  }, 
+});
+
+
+gsap.to(".owlBurrowing", {
+  yPercent: 20,
+  ease: "none",
+  scrollTrigger: {
+    trigger: ".clusterBurrowing",
+    scrub: 1
+  }, 
+});
+
+gsap.to(".captionBurrowing", {
+  yPercent: 200,
+  ease: "none",
+  scrollTrigger: {
+    trigger: ".clusterBurrowing",
+  // markers:true,
+    end: "bottom center",
+    scrub: 1
+  }, 
+});
+
+gsap.to(".clusterBurrowing", {
+  yPercent: -5,
+  ease: "none",
+  scrollTrigger: {
+    trigger: ".clusterBurrowing",
+  // markers:true,
+    end: "bottom center",
+    scrub: 1
+  }, 
+});
+
+
+/*
+gsap.set("#wrappie", {transformOrigin:"top left"});
+
+function sizeAll() {
+	var w = document.body.clientWidth;
+  	console.log(w);
+	if ( w < 960) {
+     gsap.set("#wrappie",  {scale:w/100*.125}); 
+		} 
+}
+
+window.onresize = sizeAll;
+
+sizeAll();
+*/
+
+/*
+const quotes = document.querySelectorAll(".title");
+
+function setupSplits() {
+  quotes.forEach(quote => {
+    // Reset if needed
+    if(quote.anim) {
+      quote.anim.progress(1).kill();
+      quote.childSplit.revert();
+      quote.parentSplit.revert();
+    }
+    
+    // Set up the splits
+    quote.parentSplit = new SplitText(quote, {
+      type: "lines",
+      linesClass: "split-parent"
+    });
+
+    quote.childSplit = new SplitText(quote, { type: "lines" });
+
+    // Set up the anim
+    quote.anim = gsap.from(quote.childSplit.chars, {
+      scrollTrigger: {
+        trigger: quote,
+        toggleActions: "restart pause resume reverse",
+        start: "top 50%",
+      },
+      duration: 0.6, 
+      ease: "circ.out", 
+      y: 10,
+      opacity:0,
+      stagger: 0.02,
+    });
+  });
+}
+
+ScrollTrigger.addEventListener("refresh", setupSplits);
+setupSplits();
+*/
+
+
+/* --- Split the text, Great Horned Owl --- */
+var tlSplitGreat = gsap.timeline({onComplete: () => {SplitGreat.revert()}}), 
+    SplitGreat = new SplitText(".titleGreathorned", {type:"words,chars"}), 
+    chars = SplitGreat.chars;
+
+
+tlSplitGreat.from(chars, {
+  duration: 0.8,
+  opacity:0,
+  y:10,
+  ease:"circ.out",
+  stagger: 0.02,
+}, "+=0");
+
+
+
+/* --- Split the text, Burrowing Owl --- */
+function setupSplits() {
+  
+var tlSplitBurrowing = gsap.timeline(), 
+    SplitBurrowing = new SplitText(".titleBurrowing", {type:"words,chars"}), 
+    chars = SplitBurrowing.chars; //an array of all the divs that wrap each character
+
+
+tlSplitBurrowing.from(chars, {
+  duration: 0.8,
+  opacity:0,
+  y:10,
+  ease:"circ.out",
+  stagger: 0.02,
+scrollTrigger: {
+    trigger: ".titleBurrowing",
+//markers:true,
+    start: "top 75%",
+   end: "bottom center",
+    scrub:1
+  }
+//,   onComplete: () => {SplitBurrowing.revert()}
+}, "+=0");
+
+// window.addEventListener('resize', function() {
+  // SplitBurrowing.revert();
+// });
+  
+};
+
+/*
+ScrollTrigger.addEventListener("scrollEnd", function() {
+    SplitBurrowing.revert();
+});
+*/
+
+ScrollTrigger.addEventListener("refresh", setupSplits);
+//ScrollTrigger.addEventListener("scrollEnd", () => SplitBurrowing.revert());
+setupSplits();
+
+
+/*
+// Alternate way of resizing the cluster elements since they are absolutely positioned
+$(window).resize(function (){
+if(window.matchMedia("(max-width: 500px)").matches){
+    gsap.set(".clusterGreat", {scale: 0.2, transformOrigin: "center center"});
+} else {
+  gsap.set(".clusterGreat", {scale: 1, transformOrigin: "center center"});
+          }
+});
+*/
+

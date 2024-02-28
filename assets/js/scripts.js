@@ -42,18 +42,21 @@ $(document).ready(function () {
   });
 });
 
+/* ============================================================================= 
+-----------------------------   Begin Parallax GSAP   -------------------------------
+============================================================================= */
 
-// Animation sequence for the Great Horned Owl
+// Animation sequence for Cluster A
 gsap.set(".circle", { yPercent: -5 });
 gsap.set(".dotsBlue", { yPercent: 10 });
 gsap.set(".owlHorned", { yPercent: -20 });
-gsap.set(".clusterGreat", { yPercent: 5 });
+gsap.set(".clusterA", { yPercent: 5 });
 
 gsap.to(".circle", {
   yPercent: 5,
   ease: "none",
   scrollTrigger: {
-    trigger: ".clusterGreat",
+    trigger: ".clusterA",
     scrub: 1
   },
 });
@@ -62,7 +65,7 @@ gsap.to(".dotsBlue", {
   yPercent: -10,
   ease: "none",
   scrollTrigger: {
-    trigger: ".clusterGreat",
+    trigger: ".clusterA",
     scrub: 1
   },
 });
@@ -71,7 +74,7 @@ gsap.to(".owlHorned", {
   yPercent: 20,
   ease: "none",
   scrollTrigger: {
-    trigger: ".clusterGreat",
+    trigger: ".clusterA",
     scrub: 1
   },
 });
@@ -80,36 +83,36 @@ gsap.to(".caption", {
   yPercent: 100,
   ease: "none",
   scrollTrigger: {
-    trigger: ".clusterGreat",
+    trigger: ".clusterA",
     // markers:true,
     end: "bottom center",
     scrub: 1
   },
 });
 
-gsap.to(".clusterGreat", {
+gsap.to(".clusterA", {
   yPercent: -5,
   ease: "none",
   scrollTrigger: {
-    trigger: ".clusterGreat",
+    trigger: ".clusterA",
     end: "bottom center",
     scrub: 1
   },
 });
 
 
-// Animation sequence for the Burrowing Owl
+// Animation sequence for Cluster B
 gsap.set(".triangle", { yPercent: 25, rotation: -180 });
 gsap.set(".dotsWhite", { yPercent: 10 });
-gsap.set(".owlBurrowing", { yPercent: -20 });
-gsap.set(".clusterBurrowing", { yPercent: 5 });
+gsap.set(".imageB", { yPercent: -20 });
+gsap.set(".clusterB", { yPercent: 5 });
 
 gsap.to(".triangle", {
   yPercent: -5,
   rotation: 40,
   ease: "none",
   scrollTrigger: {
-    trigger: ".clusterBurrowing",
+    trigger: ".clusterB",
     scrub: 1
   },
 });
@@ -118,82 +121,50 @@ gsap.to(".dotsWhite", {
   yPercent: -10,
   ease: "none",
   scrollTrigger: {
-    trigger: ".clusterBurrowing",
+    trigger: ".clusterB",
     scrub: 1
   },
 });
 
-gsap.to(".owlBurrowing", {
+gsap.to(".imageB", {
   yPercent: 20,
   ease: "none",
   scrollTrigger: {
-    trigger: ".clusterBurrowing",
+    trigger: ".clusterB",
     scrub: 1
   },
 });
-
-gsap.to(".captionBurrowing", {
-  yPercent: 200,
-  ease: "none",
-  scrollTrigger: {
-    trigger: ".clusterBurrowing",
-    end: "bottom center",
-    scrub: 1
-  },
-});
-
-gsap.to(".clusterBurrowing", {
-  yPercent: -5,
-  ease: "none",
-  scrollTrigger: {
-    trigger: ".clusterBurrowing",
-    // markers:true,
-    end: "bottom center",
-    scrub: 1
-  },
-});
-
-// --- Split the text, Great Horned Owl --- 
-var tlSplitGreat = gsap.timeline({ onComplete: () => { SplitGreat.revert() } }),
-  SplitGreat = new SplitText(".titleGreathorned", { type: "words,chars" }),
-  chars = SplitGreat.chars;
-
-
-tlSplitGreat.from(chars, {
-  duration: 0.8,
-  opacity: 0,
-  y: 10,
-  ease: "circ.out",
-  stagger: 0.02,
-}, "+=0");
-
-
-// --- Split the text, Burrowing Owl ---
-function setupSplits() {
-
-  var tlSplitBurrowing = gsap.timeline(),
-    SplitBurrowing = new SplitText(".titleBurrowing", { type: "words,chars" }),
-    chars = SplitBurrowing.chars; //an array of all the divs that wrap each character
-
-
-  tlSplitBurrowing.from(chars, {
-    duration: 0.8,
-    opacity: 0,
-    y: 10,
-    ease: "circ.out",
-    stagger: 0.02,
-    scrollTrigger: {
-      trigger: ".titleBurrowing",
-      start: "top 75%",
-      end: "bottom center",
-      scrub: 1
-    }
-  }, "+=0");
-};
-
-ScrollTrigger.addEventListener("refresh", setupSplits);
-setupSplits();
 
 /* ============================================================================= 
------------------------------   End New Code   ----------------------------------
+-----------------------------   End New GSAP   ----------------------------------
+============================================================================= */
+
+/* ============================================================================= 
+-----------------------------  Start GSAP Hero Title  --------------------------
+============================================================================= */
+let tl = new TimelineMax();
+
+tl
+	.from( $('.logo__u'), 2, {
+		y: -30
+	} )
+	.from( $('.logo__r'), 2,{
+		rotation: 18,
+		transformOrigin: "100% 50%"
+	},"-=1.5")
+	.from( $('.logo__i'), 2, {
+		y: "100%"
+	},"-=1.5")
+	.from( $('.logo__t-top'), 2, {
+		x: "100%"
+	},"-=1.5")
+	.from( $('.logo__t-bottom'), 2, {
+		y: "-100%"
+	},"-=1.5")
+	.from( $('.logo__y'), 2, {
+		y: "100%"
+	},"-=2");
+
+  /* ============================================================================= 
+-----------------------------  End GSAP Hero Title  --------------------------
 ============================================================================= */

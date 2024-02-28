@@ -1,62 +1,9 @@
-/**
- * -----------------------------------------------------------------------------------
- *
- *     Theme Name: Presentation
- *     Theme URI: http://iambazzy.com
- *     Description: Ripped from potfolio
- *     Author: zzapped
- *     Author URI: http://zzapped.com
- *     Version: 1.0
- *
- * -----------------------------------------------------------------------------------
- *
- * @format
- */
 
-$(function () {
-  "use strict";
-
-  var wind = $(window);
-
-  /* =============================================================================
-  -----------------------------  Smooth Scroll nav   -----------------------------
-  ============================================================================= */
-
-  $.scrollIt({
-    upKey: 38, // key code to navigate to the next section
-    downKey: 40, // key code to navigate to the previous section
-    easing: "linear", // the easing function for animation
-    scrollTime: 600, // how long (in ms) the animation takes
-    activeClass: "active", // class given to the active nav element
-    onPageChange: null, // function(pageIndex) that is called when page is changed
-    topOffset: -75, // offste (in px) for fixed top navigation
-  });
-
-  /* =============================================================================
-  -------------------------------  Progress Bar  ---------------------------------
-  ============================================================================= */
-
-  wind.on("scroll", function () {
-    $(".skill-progress .progres").each(function () {
-      var bottom_of_object = $(this).offset().top + $(this).outerHeight();
-      var bottom_of_window = $(window).scrollTop() + $(window).height();
-      var myVal = $(this).attr("data-value");
-      if (bottom_of_window > bottom_of_object) {
-        $(this).css({
-          width: myVal,
-        });
-      }
-    });
-  });
-});
-
-/* =============================================================================
------------------------------  Button scroll up   ------------------------------
-============================================================================= */
-
+// When the document is ready
 $(document).ready(function () {
   "use strict";
 
+  // Set up progress bar animation
   var progressPath = document.querySelector(".progress-wrap path");
   var pathLength = progressPath.getTotalLength();
   progressPath.style.transition = progressPath.style.WebkitTransition = "none";
@@ -65,6 +12,8 @@ $(document).ready(function () {
   progressPath.getBoundingClientRect();
   progressPath.style.transition = progressPath.style.WebkitTransition =
     "stroke-dashoffset 10ms linear";
+
+  // Update progress bar based on scroll position
   var updateProgress = function () {
     var scroll = $(window).scrollTop();
     var height = $(document).height() - $(window).height();
@@ -73,6 +22,8 @@ $(document).ready(function () {
   };
   updateProgress();
   $(window).scroll(updateProgress);
+
+  // Show/hide progress bar based on scroll position
   var offset = 150;
   var duration = 550;
   jQuery(window).on("scroll", function () {
@@ -82,6 +33,8 @@ $(document).ready(function () {
       jQuery(".progress-wrap").removeClass("active-progress");
     }
   });
+
+  // Scroll to top when progress bar is clicked
   jQuery(".progress-wrap").on("click", function (event) {
     event.preventDefault();
     jQuery("html, body").animate({ scrollTop: 0 }, duration);
@@ -89,15 +42,12 @@ $(document).ready(function () {
   });
 });
 
-/* ============================================================================= 
------------------------------   Begin New Code   --------------------------------
-============================================================================= */
 
-/* ------Great Horned Owl Sequence------  */
-gsap.set(".circle", { yPercent: -5});
-gsap.set(".dotsBlue", { yPercent: 10});
-gsap.set(".owlHorned", { yPercent: -20});
-gsap.set(".clusterGreat", { yPercent: 5});
+// Animation sequence for the Great Horned Owl
+gsap.set(".circle", { yPercent: -5 });
+gsap.set(".dotsBlue", { yPercent: 10 });
+gsap.set(".owlHorned", { yPercent: -20 });
+gsap.set(".clusterGreat", { yPercent: 5 });
 
 gsap.to(".circle", {
   yPercent: 5,
@@ -105,7 +55,7 @@ gsap.to(".circle", {
   scrollTrigger: {
     trigger: ".clusterGreat",
     scrub: 1
-  }, 
+  },
 });
 
 gsap.to(".dotsBlue", {
@@ -114,9 +64,8 @@ gsap.to(".dotsBlue", {
   scrollTrigger: {
     trigger: ".clusterGreat",
     scrub: 1
-  }, 
+  },
 });
-
 
 gsap.to(".owlHorned", {
   yPercent: 20,
@@ -124,7 +73,7 @@ gsap.to(".owlHorned", {
   scrollTrigger: {
     trigger: ".clusterGreat",
     scrub: 1
-  }, 
+  },
 });
 
 gsap.to(".caption", {
@@ -132,10 +81,10 @@ gsap.to(".caption", {
   ease: "none",
   scrollTrigger: {
     trigger: ".clusterGreat",
-  // markers:true,
+    // markers:true,
     end: "bottom center",
     scrub: 1
-  }, 
+  },
 });
 
 gsap.to(".clusterGreat", {
@@ -145,16 +94,15 @@ gsap.to(".clusterGreat", {
     trigger: ".clusterGreat",
     end: "bottom center",
     scrub: 1
-  }, 
+  },
 });
 
 
-
-/* ------Burrowing Owl Sequence------  */
-gsap.set(".triangle", { yPercent: 25, rotation:-90});
-gsap.set(".dotsWhite", { yPercent: 10});
-gsap.set(".owlBurrowing", { yPercent: -20});
-gsap.set(".clusterBurrowing", { yPercent: 5});
+// Animation sequence for the Burrowing Owl
+gsap.set(".triangle", { yPercent: 25, rotation: -180 });
+gsap.set(".dotsWhite", { yPercent: 10 });
+gsap.set(".owlBurrowing", { yPercent: -20 });
+gsap.set(".clusterBurrowing", { yPercent: 5 });
 
 gsap.to(".triangle", {
   yPercent: -5,
@@ -163,7 +111,7 @@ gsap.to(".triangle", {
   scrollTrigger: {
     trigger: ".clusterBurrowing",
     scrub: 1
-  }, 
+  },
 });
 
 gsap.to(".dotsWhite", {
@@ -172,9 +120,8 @@ gsap.to(".dotsWhite", {
   scrollTrigger: {
     trigger: ".clusterBurrowing",
     scrub: 1
-  }, 
+  },
 });
-
 
 gsap.to(".owlBurrowing", {
   yPercent: 20,
@@ -182,7 +129,7 @@ gsap.to(".owlBurrowing", {
   scrollTrigger: {
     trigger: ".clusterBurrowing",
     scrub: 1
-  }, 
+  },
 });
 
 gsap.to(".captionBurrowing", {
@@ -190,10 +137,9 @@ gsap.to(".captionBurrowing", {
   ease: "none",
   scrollTrigger: {
     trigger: ".clusterBurrowing",
-  // markers:true,
     end: "bottom center",
     scrub: 1
-  }, 
+  },
 });
 
 gsap.to(".clusterBurrowing", {
@@ -201,54 +147,53 @@ gsap.to(".clusterBurrowing", {
   ease: "none",
   scrollTrigger: {
     trigger: ".clusterBurrowing",
-  // markers:true,
+    // markers:true,
     end: "bottom center",
     scrub: 1
-  }, 
+  },
 });
 
-
-/* --- Split the text, Great Horned Owl --- */
-var tlSplitGreat = gsap.timeline({onComplete: () => {SplitGreat.revert()}}), 
-    SplitGreat = new SplitText(".titleGreathorned", {type:"words,chars"}), 
-    chars = SplitGreat.chars;
+// --- Split the text, Great Horned Owl --- 
+var tlSplitGreat = gsap.timeline({ onComplete: () => { SplitGreat.revert() } }),
+  SplitGreat = new SplitText(".titleGreathorned", { type: "words,chars" }),
+  chars = SplitGreat.chars;
 
 
 tlSplitGreat.from(chars, {
   duration: 0.8,
-  opacity:0,
-  y:10,
-  ease:"circ.out",
+  opacity: 0,
+  y: 10,
+  ease: "circ.out",
   stagger: 0.02,
 }, "+=0");
 
 
-/* --- Split the text, Burrowing Owl --- */
+// --- Split the text, Burrowing Owl ---
 function setupSplits() {
-  
-var tlSplitBurrowing = gsap.timeline(), 
-    SplitBurrowing = new SplitText(".titleBurrowing", {type:"words,chars"}), 
+
+  var tlSplitBurrowing = gsap.timeline(),
+    SplitBurrowing = new SplitText(".titleBurrowing", { type: "words,chars" }),
     chars = SplitBurrowing.chars; //an array of all the divs that wrap each character
 
 
-tlSplitBurrowing.from(chars, {
-  duration: 0.8,
-  opacity:0,
-  y:10,
-  ease:"circ.out",
-  stagger: 0.02,
-scrollTrigger: {
-    trigger: ".titleBurrowing",
-//markers:true,
-    start: "top 75%",
-   end: "bottom center",
-    scrub:1
-  }
-}, "+=0");
-  
+  tlSplitBurrowing.from(chars, {
+    duration: 0.8,
+    opacity: 0,
+    y: 10,
+    ease: "circ.out",
+    stagger: 0.02,
+    scrollTrigger: {
+      trigger: ".titleBurrowing",
+      start: "top 75%",
+      end: "bottom center",
+      scrub: 1
+    }
+  }, "+=0");
 };
-
 
 ScrollTrigger.addEventListener("refresh", setupSplits);
 setupSplits();
 
+/* ============================================================================= 
+-----------------------------   End New Code   ----------------------------------
+============================================================================= */

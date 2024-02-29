@@ -1,344 +1,44 @@
+/* Set character encoding to UTF-8 */
 @charset "UTF-8";
 
-@font-face {
-  font-family: "subtitle";
-  src: url("../fonts/BasementGrotesque-BoldExpanded.woff");
-}
+@font-face {font-family: "Normal"; src: url("../fonts/Audi/AudiTypeV02-Normal.otf"); }
+@font-face {font-family: "Bold"; src: url("../fonts/Audi/AudiTypeV02-Bold.otf"); }
+@font-face {font-family: "ExtNormal"; src: url("../fonts/Audi/AudiTypeV02-ExtendedNormal.otf"); }
+@font-face {font-family: "ExtBold"; src: url("../fonts/Audi/AudiTypeV02-ExtendedBold.otf"); }
 
-@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900&display=swap');
-
-
-/* ====================== [ Start New Code ] ====================== */
-
-* {
-  margin: 0px;
-  padding: 0px;
-  box-sizing: border-box;
-}
+* {margin: 0; padding: 0; box-sizing: border-box; outline: none; list-style: none; }
 
 body {
-  background-color: #202124;
-  padding: 40px;
+  background-color: #961423;
+  font-family: 'Normal', sans-serif;
+  font-size: 2rem;
+  color: #FFFFFF;
+  overflow-x: hidden !important;
 }
 
-.title {
-  color: #fc659e;
-  font-size: 70px;
-  line-height: 98px;
-  font-family: 'Libre Baskerville', serif;
-  padding-top: 60px;
-  padding-bottom: 40px;
-  width: 90%;
-  background-color: transparent;
-  margin: 40px auto;
-  overflow: hidden;
-  box-sizing: border-box;
-  font-kerning: none;
-}
+body.container main {padding: 100px; min-height: 225vh; }
 
-.title span {
-  color: #fff;
-  overflow: hidden;
-}
-
-img {
-  width: 100%;
-}
-
-section {
-  width: 100%;
-  max-width: 960px;
-  margin: 0 auto;
-}
-
-.cluster {
-  position: relative;
-  width: 100%;
-  max-width: 874px;
-  height: 792px;
-  margin: 100px auto;
-  background-color: transparent;
-  padding-bottom: 100px;
-}
-
-.clusterPieces {
-  position: absolute;
-}
-
-.circle {
-  width: 100%;
-  max-width: 360px;
-  height: 360px;
-  border-radius: 50%;
-  background-color: #fc659e;
-  left: 214px;
-  bottom: 0;
-  z-index: 1;
-}
-
-.dotsBlue {
-  width: 100%;
-  height: auto;
-  max-width: 494px;
-  max-height: 434px;
-  z-index: 3;
-  left: 0;
-  top: 80px;
-}
-
-.owlHorned {
-  width: 100%;
-  height: auto;
-  max-width: 450px;
-  max-height: 700px;
-  top: 0;
-  right: 0;
+.h1{
+  font-family: 'ExtBold', sans-serif;
+  color: #E30613;
+  font-size: 10vw;
+  line-height: 10.75vw;
+  text-transform: uppercase;
   z-index: 2;
 }
 
-.caption {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 14px;
-  line-height: 16px;
-  color: #fc659e;
-  text-align: right;
+.h2{
+  font-family: 'ExtNormal', sans-serif;
+  color: #E30613;
+  font-size: 4vw;
 }
 
-.caption span {
-  color: #ffffff;
-}
+/* ------------------------- Begin Scrolling Progress Button ------------------------- */
 
-#wrappie {
-  width: 960px;
-  height: 792px;
-  margin: 0 auto;
-}
+/* Style to change cursor to a pointer */
+.cursor-pointer {cursor: pointer; }
 
-.dotsWhite {
-  width: 100%;
-  height: auto;
-  max-width: 310px;
-  max-height: 588px;
-  z-index: 2;
-  left: 0;
-  top: 400px;
-}
-
-.imageB {
-  width: 100%;
-  height: auto;
-  max-width: 674px;
-  max-height: 700px;
-  top: 162px;
-  right: 0;
-  z-index: 1;
-}
-
-.triangle {
-  width: 100%;
-  max-width: 448px;
-  height: 446px;
-  left: -28px;
-  top: 0;
-  z-index: 3;
-}
-
-.clusterB {
-  max-width: 874px;
-  height: 996px;
-}
-
-.spcr300 {
-  padding-bottom: 300px;
-}
-
-@media screen and (max-width: 1025px) {
-  .title {
-    font-size: 60px;
-    line-height: 74px;
-    padding-left: 40px;
-  }
-
-  .cluster {
-    max-width: 600px;
-    height: 550px;
-    margin: 20px auto;
-  }
-
-  .dotsBlue {
-    max-width: 340px;
-    left: 0;
-    top: 56px;
-  }
-
-  .owlHorned {
-    max-width: 310px;
-  }
-
-  .circle {
-    max-width: 246px;
-    height: 246px;
-    left: 146px;
-    top: 300px;
-  }
-
-  .caption {
-    bottom: 38px;
-    right: 0;
-  }
-
-  .clusterB {
-    max-width: 600px;
-    height: 678px;
-  }
-
-  .dotsWhite {
-    max-width: 216px;
-    left: 0;
-    top: 275px;
-  }
-
-  .imageB {
-    max-width: 460px;
-    top: 112px;
-  }
-
-  .triangle {
-    max-width: 307px;
-    height: 304px;
-    left: -14px;
-  }
-
-  .captionB {
-    top: 605px;
-  }
-}
-
-@media screen and (max-width: 640px) {
-  .title {
-    font-size: 44px;
-    line-height: 61px;
-  }
-
-  .cluster {
-    max-width: 480px;
-    height: 436px;
-  }
-
-  .dotsBlue {
-    max-width: 274px;
-    left: 0;
-    top: 45px;
-  }
-
-  .owlHorned,
-  .imageB {
-    max-width: 248px;
-  }
-
-  .circle {
-    max-width: 196px;
-    height: 196px;
-    left: 115px;
-    top: 240px;
-  }
-
-  .caption {
-    bottom: 25px;
-    right: 0;
-  }
-
-  .clusterB {
-    max-width: 480px;
-    height: 542px;
-  }
-
-  .dotsWhite {
-    max-width: 174px;
-    left: 0;
-    top: 220px;
-  }
-
-  .imageB {
-    max-width: 369px;
-    top: 88px;
-  }
-
-  .triangle {
-    max-width: 240px;
-    height: 240px;
-    left: -10px;
-  }
-
-  .captionB {
-    top: 482px;
-  }
-}
-
-@media screen and (max-width: 540px) {
-  .title {
-    font-size: 34px;
-    line-height: 51px;
-    padding-left: 0px;
-  }
-
-  .clusterPieces {
-    position: relative;
-  }
-
-  .cluster {
-    max-width: 320px;
-    height: 530px;
-  }
-
-  .dotsBlue {
-    display: none
-  }
-
-  .owlHorned {
-    max-width: 320px;
-    top: 0;
-  }
-
-  .circle {
-    display: none;
-  }
-
-  .caption {
-    float: right;
-    bottom: 0;
-  }
-
-  .clusterB {
-    max-width: 320px;
-    height: 268px;
-  }
-
-  .dotsWhite {
-    display: none
-  }
-
-  .imageB {
-    max-width: 320px;
-    top: 0;
-  }
-
-  .triangle {
-    display: none
-  }
-
-  .captionB {
-    float: right;
-    top: 0;
-  }
-}
-
-/* ====================== [ End Changing Background ] ====================== */
-
-.cursor-pointer {
-  cursor: pointer;
-}
-
+/* Style for the progress wrap container */
 .progress-wrap {
   position: fixed;
   bottom: 30px;
@@ -351,32 +51,28 @@ section {
   z-index: 100;
   opacity: 0;
   visibility: hidden;
-  -webkit-transform: translateY(20px);
-  -ms-transform: translateY(20px);
   transform: translateY(20px);
-  -webkit-transition: all 400ms linear;
-  -o-transition: all 400ms linear;
   transition: all 400ms linear;
   mix-blend-mode: difference;
 }
 
+/* Style for active progress wrap container */
 .progress-wrap.active-progress {
   opacity: 1;
   visibility: visible;
-  -webkit-transform: translateY(0);
-  -ms-transform: translateY(0);
   transform: translateY(0);
 }
 
+/* Style for the ::after arrow of the progress wrap container */
 .progress-wrap::after {
   position: absolute;
   font-family: 'Font Awesome 5 Free';
   content: '\f077';
   text-align: center;
-  line-height: 44px;
+  line-height: 47px;
   font-size: 13px;
   font-weight: 900;
-  color: #fff;
+  color: #F3F3F3;
   left: 0;
   top: 0;
   height: 44px;
@@ -384,23 +80,17 @@ section {
   cursor: pointer;
   display: block;
   z-index: 1;
-  -webkit-transition: all 400ms linear;
-  -o-transition: all 400ms linear;
   transition: all 400ms linear;
 }
 
-.progress-wrap svg path {
-  fill: none;
-}
+/* Style for the SVG path within the progress wrap container */
+.progress-wrap svg path {fill: none; }
 
+/* Style for the SVG progress circle stroke path within the progress wrap container */
 .progress-wrap svg.progress-circle path {
-  stroke: #fc659e;
+  stroke: #E30613;
   stroke-width: 4;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  -webkit-transition: all 400ms linear;
-  -o-transition: all 400ms linear;
   transition: all 400ms linear;
 }
 
-/* ====================== [ End Original CSS ] ====================== */

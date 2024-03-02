@@ -1,5 +1,5 @@
 
-// When the document is ready
+// When the document is ready, being the scrolling progress
 $(document).ready(function () {
   "use strict";
 
@@ -45,8 +45,19 @@ $(document).ready(function () {
 });
 
 /* =====================================================================
-------------------------- Begin New Javascript -------------------------
+------------------------- New Javascript -------------------------
 ===================================================================== */
 
-/* ------------------------- Begin Resizing Box Animation ------------------------- */
-
+/* ------------------------- Box Animation ------------------------- */
+/* Create page load animation that scales 27 degree box element down to reveal page */
+document.addEventListener("DOMContentLoaded", function() {
+  var logoanim = document.querySelector(".logoanim");
+  logoanim.addEventListener("transitionend", function() {
+    setTimeout(function() {
+      logoanim.style.transform = "translateX(0px) skew(-28deg) scale(0.85)";
+    }, 0);
+  }, {once: true});
+  setTimeout(function() {
+    logoanim.style.transform = "translateX(250px) skew(-28deg) scale(0.85)";
+  }, 0);
+});

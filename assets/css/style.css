@@ -1,39 +1,113 @@
-/* Set character encoding to UTF-8 */
 @charset "UTF-8";
-
+/* Set Fonts */
 @font-face {font-family: "Normal"; src: url("../fonts/Audi/AudiTypeV02-Normal.otf"); }
 @font-face {font-family: "Bold"; src: url("../fonts/Audi/AudiTypeV02-Bold.otf"); }
 @font-face {font-family: "ExtNormal"; src: url("../fonts/Audi/AudiTypeV02-ExtendedNormal.otf"); }
 @font-face {font-family: "ExtBold"; src: url("../fonts/Audi/AudiTypeV02-ExtendedBold.otf"); }
 
-* {margin: 0; padding: 0; box-sizing: border-box; outline: none; list-style: none; }
+:root {
+  --primarycol: #E30613;
+  --secondarycol: #961423;
+  --white: #FFF;
+  --black: #000;
+  --silver: #B3B3B3;
+}
 
-body {
-  background-color: #961423;
+* { margin: 0; padding: 0; height: 100%; box-sizing: border-box; }
+
+body { 
   font-family: 'Normal', sans-serif;
   font-size: 2rem;
-  color: #FFFFFF;
-  overflow-x: hidden !important;
+  overflow: hidden;
+  background: var(--black);
+  /* Change background color on load   animation: bgFill 2s 1s; */
 }
 
-body.container main {padding: 100px; min-height: 225vh; }
-
-.h1{
-  font-family: 'ExtBold', sans-serif;
-  color: #E30613;
+.h1 { font-family: 'ExtBold', sans-serif;
+  color: var(--primarycol);
   font-size: 10vw;
-  line-height: 10.75vw;
-  text-transform: uppercase;
-  z-index: 2;
-}
+  line-height: 10vw; }
 
-.h2{
-  font-family: 'ExtNormal', sans-serif;
-  color: #E30613;
+.h2 { font-family: 'ExtNormal', sans-serif;
+  color: var(--primarycol);
   font-size: 4vw;
+  line-height: 4vw; }
+
+/* Page Layout */
+.wrapper {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dotted #ff0000;
 }
 
-/* ------------------------- Begin Scrolling Progress Button ------------------------- */
+/* Logo full container */
+.container {
+  height: 200px;
+  width: 750px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0px dotted #ff0000;
+}
+/* Logo dash container */
+.logodash {
+  height: 200px;
+  width: 215px;
+  margin-left: 0px;
+  border: 0px dotted #ffff00;
+}
+/* Logo dash animation */
+.logoanim {
+  width: 215px;
+  height: 200px;
+  background-color: var(--primarycol);
+  transform: skew(-28deg) scale(17.75);
+  transition: transform 650ms cubic-bezier(0.75, 0, 0.175, 1);
+  border: 0px dotted #ff00ff;
+}
+/* Logo text container */
+.logotext {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  width: 690px;
+  margin-left: -150px;
+  border: 0px dotted #00bbff;
+}
+/* Logo text animation */
+/* Font rules */
+.value {
+  font-family: 'ExtBold', sans-serif;
+  font-size: 130pt;
+  line-height: 150pt;
+  color: var(--primarycol);
+  float: left;
+  overflow: hidden;
+}
+/* Sliding text animation */
+.value span {
+  margin-left: -200%;
+  animation-name: expandValue;
+  animation-duration: 600ms;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.75, 0, 0.175, 1);
+  animation-delay: 700ms;
+}
+@keyframes expandValue { from { margin-left: -750px; } to { margin-left: 200px; } }
+
+/* Change background color on load
+@keyframes bgFill { 
+  0% { background: var(--secondarycol); }
+  100% { background: var(--black); }
+} */
+
+/* --------------------------------------------------------------------------------
+---------------------------- Scrolling Progress Button ----------------------------
+-------------------------------------------------------------------------------- */
 
 /* Style to change cursor to a pointer */
 .cursor-pointer {cursor: pointer; }
@@ -43,8 +117,8 @@ body.container main {padding: 100px; min-height: 225vh; }
   position: fixed;
   bottom: 30px;
   right: 30px;
-  height: 44px;
-  width: 44px;
+  height: 38px;
+  width: 38px;
   cursor: pointer;
   display: block;
   border-radius: 50px;
@@ -53,7 +127,6 @@ body.container main {padding: 100px; min-height: 225vh; }
   visibility: hidden;
   transform: translateY(20px);
   transition: all 400ms linear;
-  mix-blend-mode: difference;
 }
 
 /* Style for active progress wrap container */
@@ -70,13 +143,13 @@ body.container main {padding: 100px; min-height: 225vh; }
   content: '\f077';
   text-align: center;
   line-height: 47px;
-  font-size: 13px;
-  font-weight: 900;
-  color: #F3F3F3;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--primarycol);
   left: 0;
   top: 0;
-  height: 44px;
-  width: 44px;
+  height: 38px;
+  width: 38px;
   cursor: pointer;
   display: block;
   z-index: 1;
@@ -88,7 +161,7 @@ body.container main {padding: 100px; min-height: 225vh; }
 
 /* Style for the SVG progress circle stroke path within the progress wrap container */
 .progress-wrap svg.progress-circle path {
-  stroke: #E30613;
+  stroke: var(--primarycol);
   stroke-width: 4;
   box-sizing: border-box;
   transition: all 400ms linear;

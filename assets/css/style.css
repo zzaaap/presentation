@@ -110,7 +110,7 @@ Sliding logo text animation
 .logotext span {
   border: 0px dashed #00ff00;
   margin-left: -200%;
-  animation: animLogoText 650ms forwards cubic-bezier(0.75, 0, 0.175, 1) 750ms;
+  animation: animLogoText 600ms forwards cubic-bezier(0.75, 0, 0.25, 1) 750ms;
 }
 @keyframes animLogoText { from { margin-left: -800px; } to { margin-left: 300px; } }
 

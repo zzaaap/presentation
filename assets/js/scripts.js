@@ -51,13 +51,13 @@ $(document).ready(function () {
 /* ------------------------- Box Animation ------------------------- */
 /* Create page load animation that scales 27 degree box element down to reveal page */
 document.addEventListener("DOMContentLoaded", function() {
-  var logodash = document.querySelector(".logodash");
-  logodash.addEventListener("transitionend", function() {
+  var logoicon = document.querySelector(".logoicon");
+  logoicon.addEventListener("transitionend", function() {
     setTimeout(function() {
-      logodash.style.transform = "translateX(40px) skew(-28deg) scale(0.85)";
+      logoicon.style.transform = "translateX(25px) skew(-28deg) scale(0.85)";
     }, 0);
   }, {once: true});
   setTimeout(function() {
-    logodash.style.transform = "translateX(250px) skew(-28deg) scale(0.85)";
+    logoicon.style.transform = "translateX(300px) skew(-28deg) scale(0.85)";
   }, 0);
 });

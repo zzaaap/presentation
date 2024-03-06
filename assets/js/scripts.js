@@ -48,16 +48,3 @@ $(document).ready(function () {
 ------------------------- New Javascript -------------------------
 ===================================================================== */
 
-/* ------------------------- Box Animation ------------------------- */
-/* Create page load animation that scales 27 degree box element down to reveal page */
-document.addEventListener("DOMContentLoaded", function() {
-  var logoicon = document.querySelector(".logoicon");
-  logoicon.addEventListener("transitionend", function() {
-    setTimeout(function() {
-      logoicon.style.transform = "translateX(25px) skew(-28deg) scale(0.85)";
-    }, 0);
-  }, {once: true});
-  setTimeout(function() {
-    logoicon.style.transform = "translateX(300px) skew(-28deg) scale(0.85)";
-  }, 0);
-});

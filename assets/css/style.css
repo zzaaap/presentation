@@ -1,53 +1,94 @@
 @charset "UTF-8";
-/* Set Fonts
+/* Set fonts
 ---------------------------------------------------------------------------------------------------- */
 @font-face {font-family: "Normal"; src: url("../fonts/Audi/AudiTypeV02-Normal.otf"); }
 @font-face {font-family: "Bold"; src: url("../fonts/Audi/AudiTypeV02-Bold.otf"); }
 @font-face {font-family: "ExtNormal"; src: url("../fonts/Audi/AudiTypeV02-ExtendedNormal.otf"); }
 @font-face {font-family: "ExtBold"; src: url("../fonts/Audi/AudiTypeV02-ExtendedBold.otf"); }
+@font-face {font-family: "ExtItalic"; src: url("../fonts/Audi/AudiTypeV02-ExtendedItalic.otf"); }
+@font-face {font-family: "Adobe"; src: url("../fonts/Adobe/AdobeClean-ExtraBold.otf"); }
 
 
 /* Typography
 ---------------------------------------------------------------------------------------------------- */
 h1 { font-family: 'ExtBold', sans-serif; font-size: 90pt; }
-h2 { font-family: 'ExtNormal', sans-serif; font-size: 50pt; }
-h3 { font-family: 'ExtNormal', sans-serif; font-size: 24pt; }
+h2 { font-family: 'ExtBold', sans-serif; font-size: 50pt; }
+h3 { font-family: 'ExtItalic', sans-serif; font-size: 28pt; }
+h4 { font-family: 'Bold', sans-serif; font-size: 18pt; }
 
+p { padding-top: 20px; }
 
-/* Set Colors
+/* Set colors
 ---------------------------------------------------------------------------------------------------- */
 :root {
   --primarycol: #E30613;
   --secondarycol: #961423;
   --tertiarycol: #F7F7F7;
-  --dark: #000000;
   --light: #FFFFFF;
   --silver: #B3B3B3;
-  --gray: #3b3b3a;
+  --gray: #666666;
+  --dark: #000000;
 }
-
 /* Color themes */
-.hero { background: var(--secondarycol); color: var(--primarycol); }
-.light { background: var(--light); color: var(--dark); }
-.dark { background: var(--dark); color: var(--light); }
+.hero-theme { background: var(--secondarycol); color: var(--primarycol); border-radius: 10px; padding: 25px; }
+.light-theme { background: var(--light); color: var(--dark); border-radius: 10px; padding: 25px; }
+.dark-theme { background: var(--dark); color: var(--light); border-radius: 10px; padding: 25px; }
+.silver-theme { background: #F5F5F5; color: var(--dark); border-radius: 10px; padding: 25px; }
+/* Standard font colors */
+.primary-col { color: var(--primarycol); }
+.secondary-col { color: var(--secondarycol); }
+.tertiary-col { color: var(--tertiarycol); }
 
-video { position: relative; object-fit: fill; z-index: -50; height: 100%; width: 100%; }
-
-.video-wrapper { position: absolute; text-align: center; display: flex; align-items: center; justify-content: center; }
-This chat 
-/* Layout Base
+ 
+/* Layout base
 ---------------------------------------------------------------------------------------------------- */
 * { margin: 0; padding: 0; }
-body, html { font-family: 'Normal'; font-size: 1.45rem; background: var(--light); }
+body, html { font-family: 'Normal'; font-size: 1.3rem; background: var(--light); }
 body::-webkit-scrollbar { display: none; }
 
 .wrapper { height: 100%; width: 100vw; }
 
-.area { height: 775px; display: flex; align-items: center; border: 0px dashed #00ffa2; }
-/*
-.area:nth-child(odd) { height: 775px; display: flex; align-items: center; border: 0px dashed #00ffa2; }
-.area:nth-child(even) { height: 750px; width: 100%; display: flex; align-items: center; border: 0px dashed #FF00FF; }
-*/
+.area { height: auto; display: contents; align-items: center; padding: 50px 50px; }
+.area:nth-child(odd) { height: 500px; width: 100%; display: border-box; align-items: center; }
+.area:nth-child(even) { height: 500px; width: 100%; display: border-box; align-items: center; }
+
+/* Video wrapper */
+video { position: relative; object-fit: fill; z-index: -50; height: 100%; width: 100%; filter: grayscale(1) contrast(1.2); background-color: var(--dark); }
+
+.video-wrapper {
+  top: 0;
+  left: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 5px 0 0 5px;
+  margin: -50px -50px -50px 0px !important; /* top right bottom left */
+}
+
+/* Icon boxes */
+.icon-right {
+  display: inline-block;
+  font-size: 35%;
+  font-family: 'Normal';
+  line-height: 115%;
+  margin-right: 15px;
+}
+
+.icon-box {
+  background-color: var(--dark);
+  color: var(--light);
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 40px;
+  font-family: 'Adobe';
+  text-align: left;
+  line-height: 115%;
+}
+.icon-box:nth-child(even) { background-color: var(--dark); color: var(--light); }
+.icon-wrapper { display: grid; grid-gap: 10px; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); }
+
 
 
 /* Sliding header logo animations
@@ -75,7 +116,7 @@ body::-webkit-scrollbar { display: none; }
 .subvalue span { margin-top: -100%; animation: expandSubValue 1500ms forwards cubic-bezier(0.5, 0.4, 0.2, 1) 1400ms; }
 
 
-/* Sliding logo layout grid
+/* Sliding logo layout animations grid
 ---------------------------------------------------------------------------------------------------- */
 .logo-wrapper {
   display: grid;
@@ -84,9 +125,10 @@ body::-webkit-scrollbar { display: none; }
   position: relative;
   height: 200px;
   width: 800px;
-  margin-left: calc(50% - 500px);
-  padding-top: -50px;
-  border: 0px dashed #00ffa2;
+  margin-left: calc(50% - 650px);     /* Horizontal offset left of the animated logo wrapper */
+  margin-top: 100px;                 /* Veritcal top offset of the animated logo wrapper */
+  margin-bottom: 300px;              /* Veritcal bottom offset of the animated logo wrapper */
+  border: 0px dashed #00FF00;
 }
 .icon, .title, .subtext {
   grid-row: 1 / span 3;
@@ -121,16 +163,17 @@ body::-webkit-scrollbar { display: none; }
   width: 100%;
   gap: 0px;
 }
-.box { 
+.box {
   height: 100%;
   width: 100%;
   text-align: left;
-  padding: 25px 50px; 
-  border: 0px dashed var(--silver); /* ===================== BORDER COLOR ===================== */
+  padding: 50px 50px; /* Padding around the content, 25px 50px means top and bottom 25px, left and right 50px */
+  border: 1px dashed var(--silver); /* ===================== BORDER COLOR ===================== */
+  border-radius: 0px;
 }
 .cell1 { grid-column: col / span 2; grid-row: row; }
 .cell2 { grid-column: col 3 / span 2; grid-row: row; }
-.cell3 { grid-column: col / span 2; grid-row: row 2; min-height: 100%; min-width: 100%; }
+.cell3 { grid-column: col / span 2; grid-row: row 2; }
 .cell4 { grid-column: col 3 / span 2; grid-row: row 2; display: grid; grid-template-columns: 1fr 1fr; }
 .cell5 { grid-column: 1 / 3; grid-row: 1; }
 .cell6 { grid-column: 1; grid-row: 2; }
@@ -145,6 +188,7 @@ body::-webkit-scrollbar { display: none; }
   height: 100%;
   width: 100%;
   text-align: left;
+  border: 0px dashed #00FF00;
 }
 .cell8 { grid-column: 1 / 5; }
 .cell9 { grid-column: 1 / 3; grid-row: 2 / 4; }
@@ -153,7 +197,7 @@ body::-webkit-scrollbar { display: none; }
 
 /* Layout - Grid 3
 ---------------------------------------------------------------------------------------------------- */
-.grid3 {  display: grid;
+.grid3 { display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
   grid-auto-flow: row;
@@ -168,13 +212,13 @@ body::-webkit-scrollbar { display: none; }
   justify-content: center;
 }
 .cell13 { grid-area: cell13; }
-.cell14 { grid-area: cell14; background-image: url(../imgs/cota-tower.jpg); background-size: cover; background-position: center; }
+.cell14 { grid-area: cell14; } /* background-image: url(../imgs/cota-tower.jpg); background-size: cover; background-position: center; */
 .cell15 { grid-area: cell15; }
 
 
 /* Scrolling progress to-the-top button 
 ---------------------------------------------------------------------------------------------------- */
-.cursor-pointer {cursor: pointer; }
+.cursor-pointer { cursor: pointer; }
 
 .progress-wrap {
   position: fixed;
@@ -203,7 +247,7 @@ body::-webkit-scrollbar { display: none; }
   font-family: 'Font Awesome 5 Free';
   content: '\f077';
   text-align: center;
-  line-height: 36pt;
+  line-height: 30pt;
   font-size: 9pt;
   font-weight: 600;
   color: var(--primarycol);
@@ -217,7 +261,7 @@ body::-webkit-scrollbar { display: none; }
   transition: all 400ms linear;
 }
 
-.progress-wrap svg path {fill: none; }
+.progress-wrap svg path { fill: none; }
 
 .progress-wrap svg.progress-circle path {
   stroke: var(--primarycol);
@@ -229,9 +273,18 @@ body::-webkit-scrollbar { display: none; }
 /* Vertical Size Queries
 ---------------------------------------------------------------------------------------------------- */
 .vh25 { height: 25vh; }
+.vh30 { height: 30vh; }
 .vh35 { height: 35vh; }
 .vh40 { height: 40vh; }
+.vh45 { height: 45vh; }
 .vh50 { height: 50vh; }
+.vh55 { height: 55vh; }
+.vh60 { height: 60vh; }
+.vh65 { height: 65vh; }
+.vh70 { height: 70vh; }
 .vh75 { height: 75vh; }
 .vh80 { height: 80vh; }
+.vh85 { height: 85vh; }
+.vh90 { height: 90vh; }
+.vh95 { height: 95vh; }
 .vh100 { height: 100vh; }

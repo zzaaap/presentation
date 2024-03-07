@@ -9,9 +9,9 @@
 
 /* Typography
 ---------------------------------------------------------------------------------------------------- */
-h1 { font-family: 'ExtBold', sans-serif; color: var(--primarycol); font-size: 128pt; }
-h2 { font-family: 'ExtNormal', sans-serif; color: var(--secondarycol); font-size: 70pt; }
-h3 { font-family: 'ExtNormal', sans-serif; color: var(--tertiarycol); font-size: 24pt; }
+h1 { font-family: 'ExtBold', sans-serif; font-size: 90pt; }
+h2 { font-family: 'ExtNormal', sans-serif; font-size: 50pt; }
+h3 { font-family: 'ExtNormal', sans-serif; font-size: 24pt; }
 
 
 /* Set Colors
@@ -21,38 +21,51 @@ h3 { font-family: 'ExtNormal', sans-serif; color: var(--tertiarycol); font-size:
   --secondarycol: #961423;
   --tertiarycol: #F7F7F7;
   --dark: #000000;
-  --dark2: #222222;
   --light: #FFFFFF;
   --silver: #B3B3B3;
+  --gray: #3b3b3a;
 }
+
+/* Color themes */
+.hero { background: var(--secondarycol); color: var(--primarycol); }
 .light { background: var(--light); color: var(--dark); }
 .dark { background: var(--dark); color: var(--light); }
-.hero { background: var(--secondarycol); color: var(--primarycol); }
 
+video { position: absolute; top: 0; left: 0; z-index: 0; width: 100%; }
+
+.video-wrapper {
+  position: relative;
+  width: 400px;
+  height: 200px;
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 /* Layout Base
 ---------------------------------------------------------------------------------------------------- */
 * { margin: 0; padding: 0; }
-body, html { font-family: 'Normal'; font-size: 1.25rem; background: var(--dark); }
+body, html { font-family: 'Normal'; font-size: 1.45rem; background: var(--light); }
 body::-webkit-scrollbar { display: none; }
 
 .wrapper { height: 100%; width: 100vw; }
 
-.area { height: 55vh; align-items: center; background-image: url(assets/imgs/cota-tower.jpg); background-size: cover; }
-.area:nth-child(odd) { min-width: 100%; min-height: 50vh; }
-.area:nth-child(even) { height: 1000px; width: inherit; }
+.area { height: 775px; display: flex; align-items: center; border: 0px dashed #00ffa2; 
+ }
+/*
+.area:nth-child(odd) { height: 775px; display: flex; align-items: center; border: 0px dashed #00ffa2; }
+.area:nth-child(even) { height: 750px; width: 100%; display: flex; align-items: center; border: 0px dashed #FF00FF; }
+*/
 
 
 /* Sliding header logo animations
 ---------------------------------------------------------------------------------------------------- */
 /* Sliding icon animation */
 .icon-logo { height: 200px; width: 215px; background-color: var(--primarycol); }
-@keyframes expandIcon { 
-  from { transform: translate(300px, 0px); } 
-  to { transform: translate(20px, 0px); } }
-@keyframes expandIconValue {
-  from { transform: scale(15) skew(-28deg) translateX(10px); } 
-  to { transform: scale(0.85) skew(-28deg) translate(0); } }
+@keyframes expandIcon { from { transform: translate(300px, 0px); } to { transform: translate(20px, 0px); } }
+@keyframes expandIconValue { from { transform: scale(17) skew(-28deg) translateX(20px); } to { transform: scale(0.85) skew(-28deg) translate(0); } }
 .icon-is-animated { animation: expandIcon 900ms both cubic-bezier(0.55, 0, 0.175, 1) 750ms; }
 .iconvalue { animation: expandIconValue 1000ms both cubic-bezier(0.8, 0, 0.125, 1); }
 .iconvalue span { transform: scale(.85); }
@@ -60,18 +73,14 @@ body::-webkit-scrollbar { display: none; }
 /* Sliding header text animation */
 .title-is-animated { font-family: 'ExtBold'; color: var(--primarycol); position: relative; }
 .title-is-animated span { display: block; transform: translate(-12px, -32px); }
-@keyframes expandTitleValue { 
-  from { margin-left: -1500px; } 
-  to { margin-left: 50px; } }
+@keyframes expandTitleValue {  from { margin-left: -1500px; } to { margin-left: 50px; } }
 .titlevalue { font-size: 132pt; overflow: hidden; }
 .titlevalue span { margin-left: -200%; animation: expandTitleValue 800ms forwards cubic-bezier(0.45, 0, 0.2, 1) 700ms; }
 
 /* Sliding logo subheader text animation */
 .sub-is-animated { font-family: 'ExtNormal'; color: var(--light); position: relative; }
 .sub-is-animated span { display: block; }
-@keyframes expandSubValue { 
-  from { margin-top: -17px; opacity: 0; } 
-  to { margin-top: 0; opacity: 100%; } }
+@keyframes expandSubValue {  from { margin-top: -17px; opacity: 0; } to { margin-top: 0; opacity: 100%; } }
 .subvalue { font-size: 72pt; overflow: hidden; }
 .subvalue span { margin-top: -100%; animation: expandSubValue 1500ms forwards cubic-bezier(0.5, 0.4, 0.2, 1) 1400ms; }
 
@@ -86,7 +95,8 @@ body::-webkit-scrollbar { display: none; }
   height: 200px;
   width: 800px;
   margin-left: calc(50% - 500px);
-  padding-top: 200px;
+  padding-top: -50px;
+  border: 0px dashed #00ffa2;
 }
 .icon, .title, .subtext {
   grid-row: 1 / span 3;
@@ -110,6 +120,7 @@ body::-webkit-scrollbar { display: none; }
   margin-left: -215px;
 }
 
+
 /* Layout - Grid 1
 ---------------------------------------------------------------------------------------------------- */
 .grid1{
@@ -118,36 +129,57 @@ body::-webkit-scrollbar { display: none; }
   grid-template-rows: repeat(2, [row] auto );
   height: 100%;
   width: 100%;
-  gap: 10px;
+  gap: 0px;
 }
 .box { 
   height: 100%;
   width: 100%;
   text-align: left;
-  padding: 10px; 
-  border: 0px dashed var(--secondarycol); /* ===================== BORDER COLOR ===================== */
+  padding: 25px 50px; 
+  border: 1px dashed var(--silver); /* ===================== BORDER COLOR ===================== */
 }
-.item1 { grid-column: col / span 2; grid-row: row; }
-.item2 { grid-column: col 3 / span 2; grid-row: row; }
-.item3 { grid-column: col / span 2; grid-row: row 2; min-height: 100%; min-width: 100%; }
-.item4 { grid-column: col 3 / span 2; grid-row: row 2; display: grid; grid-template-columns: 1fr 1fr; }
-.item5 { grid-column: 1 / 3; grid-row: 1; }
-.item6 { grid-column: 1; grid-row: 2; }
-.item7 { grid-column: 2; grid-row: 2; }
+.cell1 { grid-column: col / span 2; grid-row: row; }
+.cell2 { grid-column: col 3 / span 2; grid-row: row; }
+.cell3 { grid-column: col / span 2; grid-row: row 2; min-height: 100%; min-width: 100%; }
+.cell4 { grid-column: col 3 / span 2; grid-row: row 2; display: grid; grid-template-columns: 1fr 1fr; }
+.cell5 { grid-column: 1 / 3; grid-row: 1; }
+.cell6 { grid-column: 1; grid-row: 2; }
+.cell7 { grid-column: 2; grid-row: 2; }
+
 
 /* Layout - Grid 2
 ---------------------------------------------------------------------------------------------------- */
 .grid2 { display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  justify-content: center;
-  align-items: center;
   height: 100%;
   width: 100%;
+  text-align: left;
 }
-.item8 { grid-column: 1 / 5; padding: 50px; background-color: var(--dark); }
-.item9 { grid-column: 1 / 3; grid-row: 2 / 4; }
-.item10 { grid-column: 3 / 5; }
+.cell8 { grid-column: 1 / 5; }
+.cell9 { grid-column: 1 / 3; grid-row: 2 / 4; }
+.cell10 { grid-column: 3 / 5; }
+
+
+/* Layout - Grid 3
+---------------------------------------------------------------------------------------------------- */
+.grid3 {  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-auto-flow: row;
+  grid-template-areas:
+    "cell13 cell14 cell14"
+    "cell15 cell15 cell15"
+    "cell15 cell15 cell15";
+  height: 100%;
+  width: 100%;
+  text-align: left;
+  align-items: center;
+  justify-content: center;
+}
+.cell13 { grid-area: cell13; }
+.cell14 { grid-area: cell14; background-image: url(../imgs/cota-tower.jpg); background-size: cover; background-position: center; }
+.cell15 { grid-area: cell15; }
 
 
 /* Scrolling progress to-the-top button 
@@ -203,3 +235,13 @@ body::-webkit-scrollbar { display: none; }
   box-sizing: border-box;
   transition: all 400ms linear;
 }
+
+/* Vertical Size Queries
+---------------------------------------------------------------------------------------------------- */
+.vh25 { height: 25vh; }
+.vh35 { height: 35vh; }
+.vh40 { height: 40vh; }
+.vh50 { height: 50vh; }
+.vh75 { height: 75vh; }
+.vh80 { height: 80vh; }
+.vh100 { height: 100vh; }
